@@ -1,409 +1,202 @@
-*{
-box-sizing:border-box;
-}
+const form=document.getElementById("orderForm");
 
 
-body{
-
-margin:0;
-
-font-family:Poppins,sans-serif;
-
-background:#050505;
-
-color:white;
-
-}
-
-
-.page{
-
-width:100%;
-
-max-width:650px;
-
-margin:auto;
-
-padding:20px;
-
-}
+let forma="Rotondo";
+let colore="Nero";
 
 
 
-header{
-
-text-align:center;
-
-animation:fade 1s;
-
-}
+document.querySelectorAll(".option").forEach(el=>{
 
 
-header h1{
-
-font-size:35px;
-
-}
+el.onclick=()=>{
 
 
+document.querySelectorAll(".option")
+.forEach(x=>x.classList.remove("active"));
 
-.card{
 
-background:#111;
+el.classList.add("active");
 
-border:1px solid #222;
 
-border-radius:25px;
+forma=el.dataset.forma;
 
-padding:25px;
 
-margin:20px 0;
+document.getElementById("forma").value=forma;
 
-box-shadow:0 20px 40px #000;
 
-animation:up .7s;
+aggiorna();
 
-}
+
+};
+
+
+});
 
 
 
-@keyframes up{
-
-from{
-
-opacity:0;
-
-transform:translateY(20px);
-
-}
-
-to{
-
-opacity:1;
-
-}
-
-}
 
 
+document.querySelectorAll(".color").forEach(el=>{
 
-.options{
 
-display:grid;
+el.onclick=()=>{
 
-grid-template-columns:repeat(3,1fr);
 
-gap:15px;
+document.querySelectorAll(".color")
+.forEach(x=>x.classList.remove("active"));
+
+
+el.classList.add("active");
+
+
+colore=el.dataset.colore;
+
+
+document.getElementById("colore").value=colore;
+
+
+document.getElementById("coloreScelto").innerHTML=colore;
+
+
+aggiorna();
+
+
+};
+
+
+});
+
+
+
+
+
+
+function aggiorna(){
+
+
+document.getElementById("previewText").innerHTML=
+
+"Portachiavi "+forma+" "+colore;
+
+
+
+let box=document.getElementById("productPreview");
+
+
+if(forma==="Rotondo"){
+
+box.style.borderRadius="50%";
 
 }
 
+if(forma==="Quadrato"){
 
+box.style.borderRadius="15px";
 
-.option{
+}
 
-height:100px;
+if(forma==="Esagonale"){
 
-background:#181818;
-
-border-radius:20px;
-
-display:flex;
-
-align-items:center;
-
-justify-content:center;
-
-flex-direction:column;
-
-font-size:30px;
-
-cursor:pointer;
-
-transition:.3s;
+box.style.borderRadius="30%";
 
 }
 
 
-
-.option span{
-
-font-size:14px;
-
-}
-
-
-
-.option.active{
-
-border:2px solid #00e5ff;
-
-transform:scale(1.04);
 
 }
 
 
 
 
-.colors{
 
-display:flex;
+form.addEventListener("submit",async e=>{
 
-gap:15px;
 
-justify-content:center;
+e.preventDefault();
+
+
+
+let dati=Object.fromEntries(
+new FormData(form).entries()
+);
+
+
+
+dati.personalizzazione=
+document.getElementById("personalizzazione").value;
+
+
+
+dati.foto=
+document.getElementById("foto").files[0]?.name || "nessuna";
+
+
+
+
+let btn=document.querySelector("button");
+
+btn.innerHTML="⏳ Invio...";
+
+
+
+
+try{
+
+
+await fetch(
+
+"https://script.google.com/macros/s/AKfycbyngEx24SuA0n7FDfbQ7QWaYdGK8TNGIu3njAdSkBUy21ZaL4ePcKMBYOqHFT2zGu0liw/exec",
+
+{
+
+
+method:"POST",
+
+redirect:"follow",
+
+headers:{
+
+"Content-Type":"text/plain;charset=utf-8"
+
+},
+
+body:JSON.stringify(dati)
+
+
+}
+
+);
+
+
+
+document.getElementById("risposta").innerHTML=
+
+"✅ Ordine inviato correttamente";
+
+
+
+form.reset();
+
+
+}
+
+catch(err){
+
+
+document.getElementById("risposta").innerHTML=
+
+"❌ Errore invio";
+
+
+console.log(err);
+
 
 }
 
 
 
-.color{
+btn.innerHTML="🚀 ORDINA ORA";
 
-width:45px;
 
-height:45px;
-
-border-radius:50%;
-
-cursor:pointer;
-
-border:3px solid transparent;
-
-}
-
-
-
-.color.active{
-
-border-color:white;
-
-transform:scale(1.2);
-
-}
-
-
-
-.black{
-background:black;
-}
-
-.white{
-background:white;
-}
-
-.blue{
-background:#0066ff;
-}
-
-.red{
-background:red;
-}
-
-.gold{
-background:gold;
-}
-
-
-
-.preview{
-
-text-align:center;
-
-}
-
-
-
-#productPreview{
-
-width:160px;
-
-height:160px;
-
-margin:auto;
-
-border-radius:50%;
-
-background:#000;
-
-display:flex;
-
-align-items:center;
-
-justify-content:center;
-
-font-size:70px;
-
-transition:.4s;
-
-}
-
-
-
-strong{
-
-font-size:30px;
-
-color:#00e5ff;
-
-}
-
-
-
-input,
-textarea{
-
-width:100%;
-
-padding:15px;
-
-margin-top:12px;
-
-background:#080808;
-
-border:1px solid #333;
-
-border-radius:15px;
-
-color:white;
-
-font-size:15px;
-
-}
-
-
-
-textarea{
-
-height:120px;
-
-resize:none;
-
-}
-
-
-
-.upload{
-
-display:block;
-
-margin-top:15px;
-
-background:#222;
-
-padding:15px;
-
-border-radius:15px;
-
-cursor:pointer;
-
-}
-
-
-
-.upload input{
-
-display:none;
-
-}
-
-
-
-.payment{
-
-margin-top:20px;
-
-}
-
-
-
-.paybox{
-
-padding:18px;
-
-background:#050505;
-
-border:1px solid #00e5ff;
-
-border-radius:15px;
-
-}
-
-
-
-button{
-
-width:100%;
-
-margin-top:20px;
-
-padding:18px;
-
-border:none;
-
-border-radius:50px;
-
-background:linear-gradient(90deg,#00e5ff,#0066ff);
-
-color:white;
-
-font-size:18px;
-
-font-weight:bold;
-
-cursor:pointer;
-
-}
-
-
-
-button:hover{
-
-transform:scale(1.03);
-
-}
-
-
-
-#risposta{
-
-text-align:center;
-
-font-size:18px;
-
-}
-
-
-
-
-@media(max-width:500px){
-
-
-.page{
-
-padding:12px;
-
-}
-
-
-header h1{
-
-font-size:26px;
-
-}
-
-
-.options{
-
-grid-template-columns:1fr;
-
-}
-
-
-
-.card{
-
-padding:18px;
-
-}
-
-
-}
+});
