@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Il mio negozio</title>
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Il mio prodotto</h1>
+
+<img src="https://via.placeholder.com/300" alt="Prodotto">
+
+<h2>€19,99</h2>
+
+<form id="orderForm">
+
+<input type="text" name="nome" placeholder="Nome" required>
+
+<input type="text" name="cognome" placeholder="Cognome" required>
+
+<input type="tel" name="telefono" placeholder="Telefono" required>
+
+<input type="text" name="indirizzo" placeholder="Indirizzo" required>
+
+<input type="number" name="quantita" value="1" min="1">
+
+<textarea name="note" placeholder="Note"></textarea>
+
+<button type="submit">Ordina</button>
+
+</form>
+
+<p id="risposta"></p>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
