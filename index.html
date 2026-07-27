@@ -3,44 +3,168 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Il mio negozio</title>
+
+<title>Firma NFC Smart</title>
 
 <link rel="stylesheet" href="style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
 </head>
 
 <body>
 
+<div class="background"></div>
+
 <div class="container">
 
-<h1>Il mio prodotto</h1>
+<div class="hero">
 
-<img src="https://via.placeholder.com/300" alt="Prodotto">
+<h1>Firma NFC Smart</h1>
 
-<h2>€19,99</h2>
-
-<form id="orderForm">
-
-<input type="text" name="nome" placeholder="Nome" required>
-
-<input type="text" name="cognome" placeholder="Cognome" required>
-
-<input type="tel" name="telefono" placeholder="Telefono" required>
-
-<input type="text" name="indirizzo" placeholder="Indirizzo" required>
-
-<input type="number" name="quantita" value="1" min="1">
-
-<textarea name="note" placeholder="Note"></textarea>
-
-<button type="submit">Ordina</button>
-
-</form>
-
-<p id="risposta"></p>
+<p>
+Il tuo profilo digitale sempre a portata di mano
+</p>
 
 </div>
 
+
+<div class="product-card">
+
+<img src="https://via.placeholder.com/300" alt="Firma NFC">
+
+<h2>Firma NFC Premium</h2>
+
+<div class="price">
+€19,99
+</div>
+
+<div class="features">
+
+<div>⚡ Attivazione immediata</div>
+<div>📱 Compatibile smartphone</div>
+<div>🚚 Pagamento alla consegna</div>
+
+</div>
+
+</div>
+
+
+
+<form id="orderForm">
+
+
+<h3>📦 Dati ordine</h3>
+
+
+<div class="row">
+
+<input 
+type="text"
+name="nome"
+placeholder="Nome"
+required>
+
+
+<input 
+type="text"
+name="cognome"
+placeholder="Cognome"
+required>
+
+</div>
+
+
+<input 
+type="tel"
+name="telefono"
+placeholder="Numero telefono"
+required>
+
+
+
+<input 
+type="text"
+name="indirizzo"
+placeholder="Indirizzo completo"
+required>
+
+
+
+<label>Quantità</label>
+
+<div class="quantity">
+
+<button type="button" id="minus">−</button>
+
+<input 
+id="quantita"
+type="number"
+name="quantita"
+value="1"
+min="1"
+readonly>
+
+<button type="button" id="plus">+</button>
+
+</div>
+
+
+
+
+<div class="payment">
+
+<h3>💵 Pagamento</h3>
+
+<div class="payment-box">
+
+<input 
+type="radio"
+checked
+disabled>
+
+<span>
+Pagamento alla consegna
+</span>
+
+🔒
+
+</div>
+
+<p>
+Metodo obbligatorio
+</p>
+
+</div>
+
+
+
+<textarea
+name="note"
+placeholder="Note aggiuntive (facoltative)">
+</textarea>
+
+
+
+<button class="order-btn" type="submit">
+
+🚀 Conferma ordine
+
+</button>
+
+
+</form>
+
+
+
+<p id="risposta"></p>
+
+
+</div>
+
+
 <script src="script.js"></script>
+
 
 </body>
 </html>
