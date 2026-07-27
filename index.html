@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="it">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Firma NFC Smart</title>
+<title>Portachiavi NFC Personalizzato</title>
 
 <link rel="stylesheet" href="style.css">
 
@@ -12,159 +14,302 @@
 
 </head>
 
+
 <body>
 
-<div class="background"></div>
 
-<div class="container">
+<div class="page">
 
-<div class="hero">
 
-<h1>Firma NFC Smart</h1>
+<header>
+
+<h1>
+🔑 Portachiavi NFC Smart
+</h1>
 
 <p>
-Il tuo profilo digitale sempre a portata di mano
+Crea il tuo portachiavi personalizzato
 </p>
 
+</header>
+
+
+
+<section class="card">
+
+
+<h2>1. Scegli la forma</h2>
+
+
+<div class="options">
+
+
+<div class="option active" data-forma="Rotondo">
+
+⭕
+<span>Rotondo</span>
+
 </div>
 
 
-<div class="product-card">
 
-<img src="https://via.placeholder.com/300" alt="Firma NFC">
+<div class="option" data-forma="Quadrato">
 
-<h2>Firma NFC Premium</h2>
+⬛
+<span>Quadrato</span>
 
-<div class="price">
+</div>
+
+
+
+<div class="option" data-forma="Esagonale">
+
+⬡
+<span>Esagonale</span>
+
+</div>
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+<section class="card">
+
+
+<h2>2. Scegli colore</h2>
+
+
+<div class="colors">
+
+
+<div class="color black active" data-colore="Nero"></div>
+
+<div class="color white" data-colore="Bianco"></div>
+
+<div class="color blue" data-colore="Blu"></div>
+
+<div class="color red" data-colore="Rosso"></div>
+
+<div class="color gold" data-colore="Oro"></div>
+
+
+</div>
+
+
+<p id="coloreScelto">
+Nero
+</p>
+
+
+</section>
+
+
+
+
+
+
+<section class="card preview">
+
+
+<h2>Anteprima</h2>
+
+
+<div id="productPreview">
+
+🔑
+
+</div>
+
+
+<h3 id="previewText">
+Portachiavi Rotondo Nero
+</h3>
+
+
+<strong>
 €19,99
-</div>
+</strong>
 
-<div class="features">
 
-<div>⚡ Attivazione immediata</div>
-<div>📱 Compatibile smartphone</div>
-<div>🚚 Pagamento alla consegna</div>
+</section>
 
-</div>
 
-</div>
 
+
+
+
+
+<section class="card">
+
+
+<h2>3. Personalizzazione</h2>
+
+
+<textarea 
+name="personalizzazione"
+id="personalizzazione"
+placeholder="Descrivi come vuoi il tuo portachiavi...
+
+Esempio:
+Logo aziendale
+Nome e telefono
+Disegno particolare">
+</textarea>
+
+
+
+
+<label class="upload">
+
+📷 Inserisci immagine/logo
+
+<input 
+type="file"
+id="foto"
+accept="image/*">
+
+</label>
+
+
+
+</section>
+
+
+
+
+
+
+
+
+<section class="card">
+
+
+<h2>4. Dati consegna</h2>
 
 
 <form id="orderForm">
 
 
-<h3>📦 Dati ordine</h3>
-
-
-<div class="row">
-
 <input 
-type="text"
 name="nome"
 placeholder="Nome"
 required>
 
 
+
 <input 
-type="text"
 name="cognome"
 placeholder="Cognome"
 required>
 
-</div>
 
 
 <input 
-type="tel"
 name="telefono"
-placeholder="Numero telefono"
+placeholder="Telefono"
 required>
 
 
 
 <input 
-type="text"
 name="indirizzo"
-placeholder="Indirizzo completo"
+placeholder="Indirizzo"
 required>
 
 
 
-<label>Quantità</label>
-
-<div class="quantity">
-
-<button type="button" id="minus">−</button>
 
 <input 
+name="quantita"
 id="quantita"
 type="number"
-name="quantita"
 value="1"
-min="1"
-readonly>
+min="1">
 
-<button type="button" id="plus">+</button>
 
-</div>
+
+<input 
+type="hidden"
+name="forma"
+id="forma"
+value="Rotondo">
+
+
+<input 
+type="hidden"
+name="colore"
+id="colore"
+value="Nero">
+
+
 
 
 
 
 <div class="payment">
 
-<h3>💵 Pagamento</h3>
 
-<div class="payment-box">
+<h3>
+💵 Pagamento
+</h3>
 
-<input 
-type="radio"
-checked
-disabled>
 
-<span>
-Pagamento alla consegna
-</span>
+<div class="paybox">
 
-🔒
+<input type="radio" checked disabled>
+
+Pagamento alla consegna 🔒
+
 
 </div>
 
-<p>
-Metodo obbligatorio
-</p>
 
 </div>
+
+
+
 
 
 
 <textarea
 name="note"
-placeholder="Note aggiuntive (facoltative)">
+placeholder="Note aggiuntive">
 </textarea>
 
 
 
-<button class="order-btn" type="submit">
 
-🚀 Conferma ordine
+<button>
+
+🚀 ORDINA ORA
 
 </button>
+
 
 
 </form>
 
 
-
 <p id="risposta"></p>
 
 
+</section>
+
+
+
 </div>
+
 
 
 <script src="script.js"></script>
 
 
 </body>
+
 </html>
