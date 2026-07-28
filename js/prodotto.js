@@ -1,5 +1,4 @@
-const API_URL = "https://script.google.com/macros/s/AKfycbyX9Kvz-Aa0PqfIoFLShhRcSuQYiffFFpZJKRncx_3S94PDN7-o83LGTHO5QrxILQ2V/exec";
-
+const API_URL = "IL TUO LINK APPS SCRIPT";
 
 
 const params = new URLSearchParams(
@@ -11,15 +10,9 @@ const idProdotto = params.get("id");
 
 
 
-const nome = document.getElementById(
-    "nome-prodotto"
-);
+const nome = document.getElementById("nome-prodotto");
 
-
-const area = document.getElementById(
-    "personalizzazione"
-);
-
+const area = document.getElementById("personalizzazione");
 
 
 
@@ -42,8 +35,6 @@ let configurazione = {
 
 
 
-
-
 fetch(API_URL)
 
 .then(response => response.json())
@@ -58,8 +49,7 @@ fetch(API_URL)
 
     if(!prodotto){
 
-        nome.innerHTML =
-        "Prodotto non trovato";
+        nome.innerHTML = "Prodotto non trovato";
 
         return;
 
@@ -67,35 +57,28 @@ fetch(API_URL)
 
 
 
-    configurazione.id =
-    prodotto.ID;
+    configurazione.id = prodotto.ID;
 
+    configurazione.nome = prodotto.Nome;
 
-    configurazione.nome =
-    prodotto.Nome;
-
-
-    configurazione.prezzo =
-    prodotto.Prezzo;
+    configurazione.prezzo = prodotto.Prezzo;
 
 
 
     mostraProdotto(prodotto);
 
 
-
 })
 
 .catch(error => {
 
-
     console.error(
-        "Errore caricamento prodotto:",
+        "Errore:",
         error
     );
 
-
 });
+
 
 
 
@@ -107,9 +90,8 @@ fetch(API_URL)
 function mostraProdotto(prodotto){
 
 
-nome.innerHTML =
-prodotto.Nome;
 
+nome.innerHTML = prodotto.Nome;
 
 
 
@@ -117,54 +99,31 @@ area.innerHTML = `
 
 
 
-<h3>
-Personalizza il tuo prodotto
-</h3>
+<h3>Personalizza il tuo prodotto</h3>
 
 
 
-
-<h4>
-Colore
-</h4>
-
+<h4>Colore</h4>
 
 <div>
 
-${creaBottoni(
-prodotto.Colori,
-"colore"
-)}
+${creaBottoni(prodotto.Colori,"colore")}
 
 </div>
 
 
 
-
-
-<h4>
-Forma
-</h4>
-
+<h4>Forma</h4>
 
 <div>
 
-${creaBottoni(
-prodotto.Forme,
-"forma"
-)}
+${creaBottoni(prodotto.Forme,"forma")}
 
 </div>
 
 
 
-
-
-
-<h4>
-Incisione
-</h4>
-
+<h4>Incisione</h4>
 
 
 <label>
@@ -177,7 +136,6 @@ onchange="scegliIncisione('Testo')">
 Testo
 
 </label>
-
 
 
 
@@ -195,12 +153,7 @@ Immagine
 
 
 
-
-
-
-<h4>
-Testo incisione
-</h4>
+<h4>Testo incisione</h4>
 
 
 <input
@@ -217,11 +170,7 @@ oninput="aggiornaTesto(this.value)"
 
 
 
-
-
-<h4>
-Carica immagine
-</h4>
+<h4>Carica immagine</h4>
 
 
 <input
@@ -238,19 +187,12 @@ onchange="caricaImmagine(event)"
 
 
 
-
-
-<h4>
-Colore anello
-</h4>
+<h4>Colore anello</h4>
 
 
 <div>
 
-${creaBottoni(
-prodotto.ColoreAnello,
-"anello"
-)}
+${creaBottoni(prodotto.ColoreAnello,"anello")}
 
 </div>
 
@@ -260,14 +202,11 @@ prodotto.ColoreAnello,
 <br>
 
 
-
 <button
 
 class="main-button"
 
-onclick="salvaConfigurazione()"
-
->
+onclick="salvaConfigurazione()">
 
 Aggiungi al carrello
 
@@ -287,13 +226,11 @@ document.getElementById(
 "immagine-prodotto"
 ).src =
 
-"images/prodotti/portachiavi/"
-+
+"images/prodotti/portachiavi/" +
 prodotto.ImmagineBase;
 
 
 }
-
 
 
 }
@@ -309,6 +246,7 @@ prodotto.ImmagineBase;
 function creaBottoni(lista,tipo){
 
 
+
 if(!lista){
 
 return "";
@@ -321,17 +259,16 @@ return lista
 
 .split(",")
 
-.map(elemento=>{
+.map(elemento => {
 
 
 return `
-
 
 <button
 
 class="option"
 
-onclick="selezionaOpzione('${tipo}','${elemento}')"
+onclick="selezionaOpzione('${tipo}','${elemento}',this)"
 
 >
 
@@ -339,9 +276,7 @@ ${elemento}
 
 </button>
 
-
 `;
-
 
 })
 
@@ -358,35 +293,29 @@ ${elemento}
 
 
 
-function selezionaOpzione(tipo,valore){
+function selezionaOpzione(tipo,valore,bottone){
 
 
 
-const pulsanti =
-document.querySelectorAll(".option");
+document
+.querySelectorAll(".option")
+.forEach(btn=>{
 
-
-
-pulsanti.forEach(p=>{
-
-
-p.classList.remove(
+btn.classList.remove(
 "selezionato"
 );
-
 
 });
 
 
 
-event.target.classList.add(
+bottone.classList.add(
 "selezionato"
 );
 
 
 
 configurazione[tipo]=valore;
-
 
 
 
@@ -411,7 +340,7 @@ function cambiaImmagineColore(colore){
 
 
 
-const immagine =
+let immagine =
 document.getElementById(
 "immagine-prodotto"
 );
@@ -428,13 +357,13 @@ return;
 
 immagine.src =
 
-"images/prodotti/portachiavi/"
-+
-colore.toLowerCase()
-.trim()
-+
-".png";
+"images/prodotti/portachiavi/" +
 
+colore.toLowerCase().trim()
+
++
+
+".png";
 
 
 }
@@ -449,8 +378,7 @@ colore.toLowerCase()
 function scegliIncisione(tipo){
 
 
-configurazione.incisione =
-tipo;
+configurazione.incisione = tipo;
 
 
 }
@@ -465,7 +393,7 @@ tipo;
 function aggiornaTesto(testo){
 
 
-const anteprima =
+let anteprima =
 document.getElementById(
 "testo-incisione"
 );
@@ -474,15 +402,13 @@ document.getElementById(
 
 if(anteprima){
 
-anteprima.innerHTML =
-testo;
+anteprima.innerHTML = testo;
 
 }
 
 
 
-configurazione.testo =
-testo;
+configurazione.testo = testo;
 
 
 }
@@ -498,7 +424,7 @@ function caricaImmagine(event){
 
 
 
-const file =
+let file =
 event.target.files[0];
 
 
@@ -511,29 +437,26 @@ return;
 
 
 
-const lettore =
+let lettore =
 new FileReader();
-
 
 
 
 lettore.onload=function(e){
 
 
-const img =
+
+let img =
 document.getElementById(
 "immagine-caricata"
 );
 
 
 
-img.src =
-e.target.result;
+img.src=e.target.result;
 
 
-
-img.style.display =
-"block";
+img.style.display="block";
 
 
 
@@ -541,12 +464,11 @@ configurazione.immagine =
 e.target.result;
 
 
-}
+};
 
 
 
 lettore.readAsDataURL(file);
-
 
 
 }
@@ -562,17 +484,21 @@ function salvaConfigurazione(){
 
 
 
-let carrello =
-JSON.parse(
+let carrello = JSON.parse(
+
 localStorage.getItem("carrello")
+
 ) || [];
 
 
 
 
-carrello.push(
-configurazione
-);
+carrello.push({
+
+...configurazione
+
+});
+
 
 
 
@@ -582,12 +508,6 @@ localStorage.setItem(
 
 JSON.stringify(carrello)
 
-);
-
-
-
-alert(
-"Prodotto aggiunto al carrello"
 );
 
 
