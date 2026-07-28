@@ -1,16 +1,15 @@
 <!DOCTYPE html>
 <html lang="it">
-
 <head>
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Portachiavi NFC Personalizzato</title>
+<title>Firma NFC Premium</title>
 
 <link rel="stylesheet" href="style.css">
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 </head>
 
@@ -18,55 +17,62 @@
 <body>
 
 
-<div class="page">
+<nav>
+
+<div class="logo">
+🌿 NFC Premium
+</div>
+
+<div class="menu">
+
+<a>Home</a>
+<a>Prodotti</a>
+<a>Personalizza</a>
+<a>Contatti</a>
+
+</div>
+
+<button onclick="scrollToOrder()">
+Crea il tuo NFC
+</button>
+
+</nav>
 
 
-<header>
+
+
+<section class="hero">
+
+
+<div class="hero-text">
+
 
 <h1>
-🔑 Portachiavi NFC Smart
+Il tuo mondo,
+<br>
+con un semplice tocco.
 </h1>
 
+
 <p>
-Crea il tuo portachiavi personalizzato
+Portachiavi NFC personalizzati
+con design premium.
 </p>
 
-</header>
 
+<button onclick="scrollToOrder()">
+Personalizza ora
+</button>
 
-
-<section class="card">
-
-
-<h2>1. Scegli la forma</h2>
-
-
-<div class="options">
-
-
-<div class="option active" data-forma="Rotondo">
-
-⭕
-<span>Rotondo</span>
 
 </div>
 
 
 
-<div class="option" data-forma="Quadrato">
+<div class="hero-product">
 
-⬛
-<span>Quadrato</span>
-
-</div>
-
-
-
-<div class="option" data-forma="Esagonale">
-
-⬡
-<span>Esagonale</span>
-
+<div id="heroKey">
+🔑
 </div>
 
 
@@ -79,95 +85,210 @@ Crea il tuo portachiavi personalizzato
 
 
 
-<section class="card">
 
 
-<h2>2. Scegli colore</h2>
+<section class="features">
+
+
+<div>
+<h3>⚡ NFC Smart</h3>
+<p>Condivisione immediata</p>
+</div>
+
+
+<div>
+<h3>🎨 Personalizzato</h3>
+<p>Scegli ogni dettaglio</p>
+</div>
+
+
+<div>
+<h3>🚚 Sicuro</h3>
+<p>Pagamento alla consegna</p>
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<section id="order" class="configurator">
+
+
+<h2>
+Crea il tuo portachiavi
+</h2>
+
+
+
+<div class="card">
+
+
+<h3>
+1. Scegli la forma
+</h3>
+
+
+<div class="choices">
+
+
+<div class="choice active" data-value="Rotondo">
+⭕
+<span>Rotondo</span>
+</div>
+
+
+<div class="choice" data-value="Quadrato">
+⬛
+<span>Quadrato</span>
+</div>
+
+
+<div class="choice" data-value="Esagonale">
+⬡
+<span>Esagonale</span>
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+<div class="card">
+
+
+<h3>
+2. Scegli colore
+</h3>
 
 
 <div class="colors">
 
 
-<div class="color black active" data-colore="Nero"></div>
+<div class="color black active" data-color="Nero"></div>
 
-<div class="color white" data-colore="Bianco"></div>
+<div class="color green" data-color="Verde"></div>
 
-<div class="color blue" data-colore="Blu"></div>
+<div class="color white" data-color="Bianco"></div>
 
-<div class="color red" data-colore="Rosso"></div>
-
-<div class="color gold" data-colore="Oro"></div>
+<div class="color gold" data-color="Oro"></div>
 
 
 </div>
 
 
-<p id="coloreScelto">
-Nero
-</p>
-
-
-</section>
+</div>
 
 
 
 
 
 
-<section class="card preview">
 
 
-<h2>Anteprima</h2>
+
+<div class="card">
 
 
-<div id="productPreview">
+<h3>
+3. Materiale
+</h3>
+
+
+<select id="materiale">
+
+<option>Premium</option>
+<option>Carbonio</option>
+<option>Legno naturale</option>
+<option>Metallo</option>
+
+</select>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+<div class="preview card">
+
+
+<h3>
+Anteprima
+</h3>
+
+
+<div id="product">
 
 🔑
 
 </div>
 
 
-<h3 id="previewText">
+<h2 id="title">
 Portachiavi Rotondo Nero
+</h2>
+
+
+<p>
+€19,99
+</p>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<div class="card">
+
+
+<h3>
+4. Personalizzazione
 </h3>
 
 
-<strong>
-€19,99
-</strong>
-
-
-</section>
-
-
-
-
-
-
-
-<section class="card">
-
-
-<h2>3. Personalizzazione</h2>
-
-
-<textarea 
-name="personalizzazione"
+<textarea
 id="personalizzazione"
-placeholder="Descrivi come vuoi il tuo portachiavi...
+placeholder="
+Scrivi come vuoi il prodotto:
 
-Esempio:
-Logo aziendale
-Nome e telefono
-Disegno particolare">
-</textarea>
-
+Nome
+Logo
+Numero telefono
+Disegno
+"></textarea>
 
 
 
 <label class="upload">
 
-📷 Inserisci immagine/logo
+📷 Carica immagine
 
 <input 
 type="file"
@@ -177,9 +298,7 @@ accept="image/*">
 </label>
 
 
-
-</section>
-
+</div>
 
 
 
@@ -187,65 +306,44 @@ accept="image/*">
 
 
 
-<section class="card">
 
 
-<h2>4. Dati consegna</h2>
+<div class="card">
+
+
+<h3>
+5. Dati ordine
+</h3>
 
 
 <form id="orderForm">
 
 
-<input 
-name="nome"
-placeholder="Nome"
-required>
+<input name="nome" placeholder="Nome" required>
+
+<input name="cognome" placeholder="Cognome" required>
+
+<input name="telefono" placeholder="Telefono" required>
+
+<input name="indirizzo" placeholder="Indirizzo" required>
 
 
 
 <input 
-name="cognome"
-placeholder="Cognome"
-required>
-
-
-
-<input 
-name="telefono"
-placeholder="Telefono"
-required>
-
-
-
-<input 
-name="indirizzo"
-placeholder="Indirizzo"
-required>
-
-
-
-
-<input 
-name="quantita"
-id="quantita"
 type="number"
+name="quantita"
 value="1"
 min="1">
 
 
 
-<input 
-type="hidden"
-name="forma"
-id="forma"
-value="Rotondo">
 
 
-<input 
-type="hidden"
-name="colore"
-id="colore"
-value="Nero">
+<input type="hidden" name="forma" id="forma" value="Rotondo">
+
+<input type="hidden" name="colore" id="colore" value="Nero">
+
+<input type="hidden" name="materiale" id="mat" value="Premium">
 
 
 
@@ -254,21 +352,9 @@ value="Nero">
 
 <div class="payment">
 
+🟢 Pagamento alla consegna
 
-<h3>
-💵 Pagamento
-</h3>
-
-
-<div class="paybox">
-
-<input type="radio" checked disabled>
-
-Pagamento alla consegna 🔒
-
-
-</div>
-
+🔒 Metodo obbligatorio
 
 </div>
 
@@ -276,34 +362,36 @@ Pagamento alla consegna 🔒
 
 
 
-
-<textarea
+<textarea 
 name="note"
-placeholder="Note aggiuntive">
+placeholder="Note ordine">
 </textarea>
 
 
 
 
-<button>
+<button class="send">
 
-🚀 ORDINA ORA
+🚀 Conferma ordine
 
 </button>
-
 
 
 </form>
 
 
-<p id="risposta"></p>
+<div id="risposta"></div>
+
+
+</div>
+
 
 
 </section>
 
 
 
-</div>
+
 
 
 
@@ -311,5 +399,4 @@ placeholder="Note aggiuntive">
 
 
 </body>
-
 </html>
