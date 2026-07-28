@@ -379,3 +379,118 @@ function caricaImmagine(event){
 
 
 }
+
+let configurazione = {
+
+    colore:"",
+    forma:"",
+    incisione:"",
+    testo:"",
+    immagine:"",
+    anello:""
+
+};
+
+
+
+
+
+function selezionaOpzione(opzione){
+
+
+    const pulsanti =
+    document.querySelectorAll(".option");
+
+
+    pulsanti.forEach(p => {
+
+        if(p.innerHTML.trim() == opzione){
+
+            p.classList.add("selezionato");
+
+        }
+
+    });
+
+
+
+    configurazione.colore = opzione;
+
+
+
+    cambiaImmagineColore(opzione);
+
+
+
+}
+
+
+
+
+
+
+
+function cambiaImmagineColore(colore){
+
+
+
+    const immagine =
+    document.getElementById(
+        "immagine-prodotto"
+    );
+
+
+
+    if(!immagine){
+
+        return;
+
+    }
+
+
+
+    let nome =
+    colore.toLowerCase();
+
+
+
+    immagine.src =
+    `images/prodotti/portachiavi/${nome}.png`;
+
+
+
+}
+
+
+
+
+
+
+
+function aggiornaTesto(testo){
+
+
+    document.getElementById(
+        "testo-incisione"
+    ).innerHTML = testo;
+
+
+
+    configurazione.testo = testo;
+
+
+}
+
+
+
+
+
+
+
+function salvaConfigurazione(){
+
+
+console.log(configurazione);
+
+
+}
