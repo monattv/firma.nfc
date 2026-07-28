@@ -1,4 +1,15 @@
-const form=document.getElementById("orderForm");
+function scrollToOrder(){
+
+document
+.getElementById("order")
+.scrollIntoView({
+behavior:"smooth"
+});
+
+}
+
+
+
 
 
 let forma="Rotondo";
@@ -6,20 +17,26 @@ let colore="Nero";
 
 
 
-document.querySelectorAll(".option").forEach(el=>{
+const prodotto=document.getElementById("product");
 
 
-el.onclick=()=>{
 
 
-document.querySelectorAll(".option")
+document.querySelectorAll(".choice")
+.forEach(card=>{
+
+
+card.onclick=()=>{
+
+
+document.querySelectorAll(".choice")
 .forEach(x=>x.classList.remove("active"));
 
 
-el.classList.add("active");
+card.classList.add("active");
 
 
-forma=el.dataset.forma;
+forma=card.dataset.value;
 
 
 document.getElementById("forma").value=forma;
@@ -37,26 +54,25 @@ aggiorna();
 
 
 
-document.querySelectorAll(".color").forEach(el=>{
+
+document.querySelectorAll(".color")
+.forEach(c=>{
 
 
-el.onclick=()=>{
+c.onclick=()=>{
 
 
 document.querySelectorAll(".color")
 .forEach(x=>x.classList.remove("active"));
 
 
-el.classList.add("active");
+c.classList.add("active");
 
 
-colore=el.dataset.colore;
+colore=c.dataset.color;
 
 
 document.getElementById("colore").value=colore;
-
-
-document.getElementById("coloreScelto").innerHTML=colore;
 
 
 aggiorna();
@@ -72,45 +88,89 @@ aggiorna();
 
 
 
+document
+.getElementById("materiale")
+.addEventListener("change",e=>{
+
+
+document.getElementById("mat").value=e.target.value;
+
+
+});
+
+
+
+
+
+
+
 function aggiorna(){
 
 
-document.getElementById("previewText").innerHTML=
+document.getElementById("title")
+.innerHTML=
 
 "Portachiavi "+forma+" "+colore;
 
 
 
-let box=document.getElementById("productPreview");
-
-
 if(forma==="Rotondo"){
 
-box.style.borderRadius="50%";
+prodotto.style.borderRadius="50%";
 
 }
 
 if(forma==="Quadrato"){
 
-box.style.borderRadius="15px";
+prodotto.style.borderRadius="20px";
 
 }
 
 if(forma==="Esagonale"){
 
-box.style.borderRadius="30%";
+prodotto.style.borderRadius="35%";
 
 }
 
 
 
+
+if(colore==="Nero"){
+
+prodotto.style.background="#000";
+
+}
+
+if(colore==="Verde"){
+
+prodotto.style.background="#10b981";
+
+}
+
+if(colore==="Bianco"){
+
+prodotto.style.background="#eee";
+
+}
+
+if(colore==="Oro"){
+
+prodotto.style.background="#d4af37";
+
+}
+
+
 }
 
 
 
 
 
-form.addEventListener("submit",async e=>{
+const form=document.getElementById("orderForm");
+
+
+
+form.addEventListener("submit",async(e)=>{
 
 
 e.preventDefault();
@@ -118,7 +178,9 @@ e.preventDefault();
 
 
 let dati=Object.fromEntries(
+
 new FormData(form).entries()
+
 );
 
 
@@ -134,9 +196,13 @@ document.getElementById("foto").files[0]?.name || "nessuna";
 
 
 
-let btn=document.querySelector("button");
+let button=document.querySelector(".send");
 
-btn.innerHTML="⏳ Invio...";
+
+button.innerHTML="⏳ Invio ordine...";
+
+button.disabled=true;
+
 
 
 
@@ -150,14 +216,15 @@ await fetch(
 
 {
 
-
 method:"POST",
 
 redirect:"follow",
 
 headers:{
 
-"Content-Type":"text/plain;charset=utf-8"
+"Content-Type":
+
+"text/plain;charset=utf-8"
 
 },
 
@@ -170,33 +237,42 @@ body:JSON.stringify(dati)
 
 
 
+
+
 document.getElementById("risposta").innerHTML=
 
-"✅ Ordine inviato correttamente";
+"✅ Ordine completato! Ti contatteremo presto.";
+
 
 
 
 form.reset();
 
 
+
 }
 
-catch(err){
+catch(error){
 
 
 document.getElementById("risposta").innerHTML=
 
-"❌ Errore invio";
+"❌ Errore durante l'invio";
 
 
-console.log(err);
+console.error(error);
 
 
 }
 
 
 
-btn.innerHTML="🚀 ORDINA ORA";
+
+
+button.innerHTML="🚀 Conferma ordine";
+
+button.disabled=false;
+
 
 
 });
