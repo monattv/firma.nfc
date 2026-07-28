@@ -1,15 +1,14 @@
 <!DOCTYPE html>
 <html lang="it">
+
 <head>
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Firma NFC Premium</title>
+<title>NFC Store | Portachiavi Smart</title>
 
 <link rel="stylesheet" href="style.css">
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 </head>
 
@@ -17,26 +16,45 @@
 <body>
 
 
-<nav>
+<header class="navbar">
 
 <div class="logo">
-🌿 NFC Premium
+🌿 NFC STORE
 </div>
 
-<div class="menu">
 
-<a>Home</a>
-<a>Prodotti</a>
-<a>Personalizza</a>
-<a>Contatti</a>
+<nav>
 
-</div>
+<a href="index.html">
+Home
+</a>
 
-<button onclick="scrollToOrder()">
-Crea il tuo NFC
-</button>
+<a href="#prodotti">
+Prodotti
+</a>
+
+<a href="#">
+Come funziona
+</a>
+
 
 </nav>
+
+
+
+<a class="cart" href="checkout.html">
+
+🛒
+
+<span id="cartCount">
+0
+</span>
+
+</a>
+
+
+</header>
+
 
 
 
@@ -44,39 +62,52 @@ Crea il tuo NFC
 <section class="hero">
 
 
-<div class="hero-text">
+<div class="heroText">
 
 
 <h1>
-Il tuo mondo,
+
+Il tuo mondo.
 <br>
-con un semplice tocco.
+
+Con un semplice tocco.
+
 </h1>
 
 
+
 <p>
-Portachiavi NFC personalizzati
-con design premium.
+
+Portachiavi NFC personalizzati,
+eleganti e intelligenti.
+
 </p>
 
 
-<button onclick="scrollToOrder()">
-Personalizza ora
-</button>
+
+<a href="#prodotti" class="mainBtn">
+
+Scopri il prodotto
+
+</a>
 
 
 </div>
 
 
 
-<div class="hero-product">
 
-<div id="heroKey">
+
+<div class="heroImage">
+
+<div class="nfc3d">
+
 🔑
-</div>
-
 
 </div>
+
+</div>
+
 
 
 </section>
@@ -87,300 +118,63 @@ Personalizza ora
 
 
 
-<section class="features">
-
-
-<div>
-<h3>⚡ NFC Smart</h3>
-<p>Condivisione immediata</p>
-</div>
-
-
-<div>
-<h3>🎨 Personalizzato</h3>
-<p>Scegli ogni dettaglio</p>
-</div>
-
-
-<div>
-<h3>🚚 Sicuro</h3>
-<p>Pagamento alla consegna</p>
-</div>
-
-
-</section>
-
-
-
-
-
-
-
-
-
-<section id="order" class="configurator">
+<section id="prodotti" class="products">
 
 
 <h2>
-Crea il tuo portachiavi
+
+I nostri prodotti
+
 </h2>
 
 
 
-<div class="card">
 
+<div class="productCard">
 
-<h3>
-1. Scegli la forma
-</h3>
 
 
-<div class="choices">
-
-
-<div class="choice active" data-value="Rotondo">
-⭕
-<span>Rotondo</span>
-</div>
-
-
-<div class="choice" data-value="Quadrato">
-⬛
-<span>Quadrato</span>
-</div>
-
-
-<div class="choice" data-value="Esagonale">
-⬡
-<span>Esagonale</span>
-</div>
-
-
-</div>
-
-
-</div>
-
-
-
-
-
-
-
-
-<div class="card">
-
-
-<h3>
-2. Scegli colore
-</h3>
-
-
-<div class="colors">
-
-
-<div class="color black active" data-color="Nero"></div>
-
-<div class="color green" data-color="Verde"></div>
-
-<div class="color white" data-color="Bianco"></div>
-
-<div class="color gold" data-color="Oro"></div>
-
-
-</div>
-
-
-</div>
-
-
-
-
-
-
-
-
-
-<div class="card">
-
-
-<h3>
-3. Materiale
-</h3>
-
-
-<select id="materiale">
-
-<option>Premium</option>
-<option>Carbonio</option>
-<option>Legno naturale</option>
-<option>Metallo</option>
-
-</select>
-
-
-</div>
-
-
-
-
-
-
-
-
-
-
-<div class="preview card">
-
-
-<h3>
-Anteprima
-</h3>
-
-
-<div id="product">
+<div class="productImage">
 
 🔑
 
 </div>
 
 
-<h2 id="title">
-Portachiavi Rotondo Nero
-</h2>
 
 
-<p>
-€19,99
+<h3>
+
+Portachiavi NFC Base
+
+</h3>
+
+
+<p class="price">
+
+19,99 €
+
 </p>
 
 
-</div>
+<p>
 
+Personalizzabile con forma,
+colore e design.
 
+</p>
 
 
 
 
+<button 
+class="addBtn"
+onclick="openProduct()">
 
-
-
-<div class="card">
-
-
-<h3>
-4. Personalizzazione
-</h3>
-
-
-<textarea
-id="personalizzazione"
-placeholder="
-Scrivi come vuoi il prodotto:
-
-Nome
-Logo
-Numero telefono
-Disegno
-"></textarea>
-
-
-
-<label class="upload">
-
-📷 Carica immagine
-
-<input 
-type="file"
-id="foto"
-accept="image/*">
-
-</label>
-
-
-</div>
-
-
-
-
-
-
-
-
-
-<div class="card">
-
-
-<h3>
-5. Dati ordine
-</h3>
-
-
-<form id="orderForm">
-
-
-<input name="nome" placeholder="Nome" required>
-
-<input name="cognome" placeholder="Cognome" required>
-
-<input name="telefono" placeholder="Telefono" required>
-
-<input name="indirizzo" placeholder="Indirizzo" required>
-
-
-
-<input 
-type="number"
-name="quantita"
-value="1"
-min="1">
-
-
-
-
-
-<input type="hidden" name="forma" id="forma" value="Rotondo">
-
-<input type="hidden" name="colore" id="colore" value="Nero">
-
-<input type="hidden" name="materiale" id="mat" value="Premium">
-
-
-
-
-
-
-<div class="payment">
-
-🟢 Pagamento alla consegna
-
-🔒 Metodo obbligatorio
-
-</div>
-
-
-
-
-
-<textarea 
-name="note"
-placeholder="Note ordine">
-</textarea>
-
-
-
-
-<button class="send">
-
-🚀 Conferma ordine
++
 
 </button>
 
-
-</form>
-
-
-<div id="risposta"></div>
 
 
 </div>
@@ -392,6 +186,66 @@ placeholder="Note ordine">
 
 
 
+
+
+
+<section class="info">
+
+
+<div>
+
+<h3>
+⚡ NFC
+</h3>
+
+<p>
+Condivisione immediata
+</p>
+
+</div>
+
+
+
+<div>
+
+<h3>
+🎨
+</h3>
+
+<p>
+Personalizzazione completa
+</p>
+
+</div>
+
+
+
+<div>
+
+<h3>
+🚚
+</h3>
+
+<p>
+Pagamento alla consegna
+</p>
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+<footer>
+
+© 2026 NFC Store
+
+</footer>
 
 
 
@@ -399,4 +253,5 @@ placeholder="Note ordine">
 
 
 </body>
+
 </html>
