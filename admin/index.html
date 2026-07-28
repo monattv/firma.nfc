@@ -1,16 +1,66 @@
 <!DOCTYPE html>
+
 <html lang="it">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Admin - Firma NFC</title>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Admin Firma NFC</title>
+
+<link rel="stylesheet" href="admin.css">
+
 </head>
+
 
 <body>
 
-<h1>Dashboard Admin</h1>
 
-<p>Area privata gestione negozio</p>
+<div class="login-box">
+
+
+<h1>
+Firma NFC
+</h1>
+
+
+<h2>
+Area Admin
+</h2>
+
+
+
+<input 
+id="username"
+placeholder="Username">
+
+
+
+<input 
+id="password"
+type="password"
+placeholder="Password">
+
+
+
+<button onclick="login()">
+Accedi
+</button>
+
+
+
+<p id="errore"></p>
+
+
+</div>
+
+
+
+<script src="admin.js"></script>
+
 
 </body>
+
 </html>
