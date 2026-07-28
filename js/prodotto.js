@@ -1,17 +1,15 @@
 const API_URL = "https://script.google.com/macros/s/AKfycbyX9Kvz-Aa0PqfIoFLShhRcSuQYiffFFpZJKRncx_3S94PDN7-o83LGTHO5QrxILQ2V/exec";
 
 
-// Recupera ID prodotto dall'URL
 
 const params = new URLSearchParams(
     window.location.search
 );
 
+
 const idProdotto = params.get("id");
 
 
-
-// Elementi pagina
 
 const nome = document.getElementById(
     "nome-prodotto"
@@ -24,7 +22,6 @@ const area = document.getElementById(
 
 
 
-// Configurazione cliente
 
 let configurazione = {
 
@@ -36,14 +33,16 @@ let configurazione = {
     incisione:"",
     testo:"",
     immagine:"",
-    anello:""
+    anello:"",
+    quantita:1
 
 };
 
 
 
 
-// Caricamento prodotti da Google Sheets
+
+
 
 fetch(API_URL)
 
@@ -105,16 +104,16 @@ fetch(API_URL)
 
 
 
-
 function mostraProdotto(prodotto){
 
 
-    nome.innerHTML =
-    prodotto.Nome;
+nome.innerHTML =
+prodotto.Nome;
 
 
 
-    area.innerHTML = `
+
+area.innerHTML = `
 
 
 
@@ -133,8 +132,8 @@ Colore
 <div>
 
 ${creaBottoni(
-    prodotto.Colori,
-    "colore"
+prodotto.Colori,
+"colore"
 )}
 
 </div>
@@ -151,11 +150,12 @@ Forma
 <div>
 
 ${creaBottoni(
-    prodotto.Forme,
-    "forma"
+prodotto.Forme,
+"forma"
 )}
 
 </div>
+
 
 
 
@@ -169,17 +169,10 @@ Incisione
 
 <label>
 
-<input
-
+<input 
 type="radio"
-
 name="incisione"
-
-value="Testo"
-
-onchange="scegliIncisione('Testo')"
-
->
+onchange="scegliIncisione('Testo')">
 
 Testo
 
@@ -190,21 +183,15 @@ Testo
 
 <label>
 
-<input
-
+<input 
 type="radio"
-
 name="incisione"
-
-value="Immagine"
-
-onchange="scegliIncisione('Immagine')"
-
->
+onchange="scegliIncisione('Immagine')">
 
 Immagine
 
 </label>
+
 
 
 
@@ -216,10 +203,7 @@ Testo incisione
 </h4>
 
 
-
 <input
-
-id="testo-personalizzato"
 
 type="text"
 
@@ -238,8 +222,6 @@ oninput="aggiornaTesto(this.value)"
 <h4>
 Carica immagine
 </h4>
-
-
 
 
 <input
@@ -266,8 +248,8 @@ Colore anello
 <div>
 
 ${creaBottoni(
-    prodotto.ColoreAnello,
-    "anello"
+prodotto.ColoreAnello,
+"anello"
 )}
 
 </div>
@@ -298,8 +280,6 @@ Aggiungi al carrello
 
 
 
-// Immagine iniziale
-
 if(prodotto.ImmagineBase){
 
 
@@ -329,7 +309,6 @@ prodotto.ImmagineBase;
 function creaBottoni(lista,tipo){
 
 
-
 if(!lista){
 
 return "";
@@ -338,12 +317,11 @@ return "";
 
 
 
-
 return lista
 
 .split(",")
 
-.map(elemento => {
+.map(elemento=>{
 
 
 return `
@@ -380,7 +358,6 @@ ${elemento}
 
 
 
-
 function selezionaOpzione(tipo,valore){
 
 
@@ -390,20 +367,7 @@ document.querySelectorAll(".option");
 
 
 
-pulsanti.forEach(p => {
-
-
-if(p.innerHTML.trim()==valore){
-
-
-p.classList.add(
-"selezionato"
-);
-
-
-}
-
-else {
+pulsanti.forEach(p=>{
 
 
 p.classList.remove(
@@ -411,12 +375,13 @@ p.classList.remove(
 );
 
 
-}
-
-
 });
 
 
+
+event.target.classList.add(
+"selezionato"
+);
 
 
 
@@ -425,20 +390,15 @@ configurazione[tipo]=valore;
 
 
 
-
 if(tipo=="colore"){
-
 
 cambiaImmagineColore(valore);
 
-
 }
 
 
 
-
 }
-
 
 
 
@@ -466,26 +426,18 @@ return;
 
 
 
-let nomeFile =
-colore
-.toLowerCase()
-.trim();
-
-
-
-
 immagine.src =
 
 "images/prodotti/portachiavi/"
 +
-nomeFile
+colore.toLowerCase()
+.trim()
 +
 ".png";
 
 
 
 }
-
 
 
 
@@ -501,9 +453,7 @@ configurazione.incisione =
 tipo;
 
 
-
 }
-
 
 
 
@@ -515,7 +465,6 @@ tipo;
 function aggiornaTesto(testo){
 
 
-
 const anteprima =
 document.getElementById(
 "testo-incisione"
@@ -525,10 +474,8 @@ document.getElementById(
 
 if(anteprima){
 
-
 anteprima.innerHTML =
 testo;
-
 
 }
 
@@ -538,9 +485,7 @@ configurazione.testo =
 testo;
 
 
-
 }
-
 
 
 
@@ -572,9 +517,7 @@ new FileReader();
 
 
 
-lettore.onload =
-function(e){
-
+lettore.onload=function(e){
 
 
 const img =
@@ -598,9 +541,7 @@ configurazione.immagine =
 e.target.result;
 
 
-
 }
-
 
 
 
@@ -617,34 +558,42 @@ lettore.readAsDataURL(file);
 
 
 
-
 function salvaConfigurazione(){
 
 
 
-console.log(
-"Configurazione:",
+let carrello =
+JSON.parse(
+localStorage.getItem("carrello")
+) || [];
+
+
+
+
+carrello.push(
 configurazione
 );
 
 
 
-
 localStorage.setItem(
 
-"prodottoCarrello",
+"carrello",
 
-JSON.stringify(configurazione)
+JSON.stringify(carrello)
 
 );
-
 
 
 
 alert(
-"Prodotto aggiunto al carrello!"
+"Prodotto aggiunto al carrello"
 );
 
+
+
+window.location.href =
+"carrello.html";
 
 
 }
