@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="it">
+
+
+<head>
+
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<title>Prodotti - Firma NFC</title>
+
+
+<link rel="stylesheet" href="admin.css">
+
+
+</head>
+
+
+
+<body>
+
+
+
+<div class="dashboard-container">
+
+
+
+<header class="dashboard-header">
+
+
+<div class="logo">
+Firma<span>NFC</span>
+</div>
+
+
+<h1>
+Gestione Prodotti
+</h1>
+
+
+<button class="logout" onclick="tornaIndietro()">
+
+Indietro
+
+</button>
+
+
+
+</header>
+
+
+
+
+
+
+<section class="ordini-section">
+
+
+<h2>
+Lista prodotti
+</h2>
+
+
+<button onclick="caricaProdotti()">
+
+🔄 Carica prodotti
+
+</button>
+
+
+
+
+<div id="prodotti">
+
+</div>
+
+
+
+</section>
+
+
+
+
+
+
+</div>
+
+
+
+
+
+<script src="prodotti.js"></script>
+
+
+
+<script>
+
+
+if(localStorage.getItem("adminLogin") !== "true"){
+
+window.location.href="index.html";
+
+}
+
+
+
+function tornaIndietro(){
+
+window.location.href="dashboard.html";
+
+}
+
+
+
+</script>
+
+
+
+</body>
+
+
+</html>
