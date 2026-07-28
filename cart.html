@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Carrello | NFC Store</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+<header class="navbar">
+
+<div class="logo">
+🌿 NFC STORE
+</div>
+
+
+<a href="index.html" class="cart">
+← Continua acquisti
+</a>
+
+
+</header>
+
+
+
+
+
+<section class="checkout">
+
+
+<h1>
+Il tuo carrello
+</h1>
+
+
+
+<div id="cartContainer"></div>
+
+
+
+
+<div class="summary">
+
+
+<h2>
+Totale:
+€<span id="cartTotal">
+0
+</span>
+</h2>
+
+
+
+<button 
+class="mainBtn"
+onclick="goCheckout()">
+
+Procedi al checkout
+
+</button>
+
+
+
+</div>
+
+
+
+</section>
+
+
+
+<script src="cart.js"></script>
+
+
+</body>
+
+</html>
