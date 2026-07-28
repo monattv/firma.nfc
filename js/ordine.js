@@ -1,3 +1,8 @@
+const API_URL = 
+"https://script.google.com/macros/s/AKfycbyX9Kvz-Aa0PqfIoFLShhRcSuQYiffFFpZJKRncx_3S94PDN7-o83LGTHO5QrxILQ2V/exec";
+
+
+
 let carrello = JSON.parse(
 
 localStorage.getItem("carrello")
@@ -8,17 +13,18 @@ localStorage.getItem("carrello")
 
 
 
-const riepilogo = document.getElementById(
-
+const riepilogo =
+document.getElementById(
 "riepilogo-ordine"
-
 );
 
 
 
 
 
+
 mostraRiepilogo();
+
 
 
 
@@ -33,21 +39,13 @@ function mostraRiepilogo(){
 if(carrello.length===0){
 
 
-riepilogo.innerHTML = `
+riepilogo.innerHTML =
 
-<h3>
-
-Nessun prodotto nel carrello
-
-</h3>
-
-`;
+"<h3>Carrello vuoto</h3>";
 
 return;
 
-
 }
-
 
 
 
@@ -58,9 +56,7 @@ let totale = 0;
 let html = `
 
 <h2>
-
 Riepilogo ordine
-
 </h2>
 
 `;
@@ -77,7 +73,9 @@ Number(prodotto.prezzo);
 
 
 
-totale += prezzo * prodotto.quantita;
+totale += 
+prezzo * prodotto.quantita;
+
 
 
 
@@ -89,34 +87,39 @@ html += `
 
 
 <h3>
-
 ${prodotto.nome}
-
 </h3>
 
 
 <p>
-
 Colore:
 ${prodotto.colore || "-"}
-
 </p>
 
 
 <p>
+Forma:
+${prodotto.forma || "-"}
+</p>
 
+
+<p>
+Incisione:
+${prodotto.incisione || "-"}
+</p>
+
+
+<p>
 Testo:
 ${prodotto.testo || "-"}
-
 </p>
 
 
 <p>
-
 Quantità:
 ${prodotto.quantita}
-
 </p>
+
 
 
 </div>
@@ -130,14 +133,13 @@ ${prodotto.quantita}
 
 
 
-
 html += `
 
 
 <h2>
 
 Totale:
-${totale.toFixed(2)} €
+€ ${totale.toFixed(2)}
 
 </h2>
 
@@ -147,6 +149,7 @@ ${totale.toFixed(2)} €
 
 
 riepilogo.innerHTML = html;
+
 
 
 }
@@ -159,18 +162,39 @@ riepilogo.innerHTML = html;
 
 
 
-document.getElementById(
-
-"form-ordine"
-
-).addEventListener(
+document
+.getElementById("form-ordine")
+.addEventListener(
 
 "submit",
 
 function(e){
 
 
+
 e.preventDefault();
+
+
+
+
+let totale = 0;
+
+
+
+carrello.forEach(p=>{
+
+
+totale +=
+
+Number(p.prezzo) *
+
+p.quantita;
+
+
+});
+
+
+
 
 
 
@@ -213,9 +237,16 @@ note:
 document.getElementById("note").value,
 
 
+
 prodotti:
 
-carrello
+carrello,
+
+
+
+totale:
+
+totale.toFixed(2)
 
 
 };
@@ -223,24 +254,92 @@ carrello
 
 
 
+
+
+
+fetch(
+
+API_URL,
+
+{
+
+method:"POST",
+
+
+body:
+
+JSON.stringify(ordine)
+
+}
+
+)
+
+.then(
+
+response=>response.json()
+
+)
+
+.then(
+
+risultato=>{
+
+
 console.log(
-
-"ORDINE",
-
-ordine
-
+"Ordine inviato:",
+risultato
 );
 
 
+
+localStorage.removeItem(
+"carrello"
+);
 
 
 
 alert(
 
-"Ordine pronto per l'invio!"
+"Ordine inviato correttamente!"
 
 );
 
 
 
-});
+window.location.href =
+"index.html";
+
+
+
+}
+
+)
+
+.catch(
+
+errore=>{
+
+
+console.error(
+errore
+);
+
+
+
+alert(
+
+"Errore invio ordine"
+
+);
+
+
+
+}
+
+);
+
+
+
+}
+
+);
