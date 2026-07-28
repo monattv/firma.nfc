@@ -1,13 +1,12 @@
-const API_URL = "https://script.google.com/macros/s/AKfycbyX9Kvz-Aa0PqfIoFLShhRcSuQYiffFFpZJKRncx_3S94PDN7-o83LGTHO5QrxILQ2V/exec";
+const API_URL = "IL_TUO_LINK";
 
 
 fetch(API_URL)
 
-.then(risposta => risposta.json())
+.then(response => response.text())
 
-.then(prodotti => {
+.then(data => {
 
-console.log(prodotti);
-
+    console.log(data);
 
 });
