@@ -1,6 +1,7 @@
 const API_URL = "https://script.google.com/macros/s/AKfycbyX9Kvz-Aa0PqfIoFLShhRcSuQYiffFFpZJKRncx_3S94PDN7-o83LGTHO5QrxILQ2V/exec";
 
 
+
 const params = new URLSearchParams(
     window.location.search
 );
@@ -16,18 +17,18 @@ const area = document.getElementById("personalizzazione");
 
 
 
+let prodottoCorrente = null;
+
+
+
 let configurazione = {
 
-    id:"",
-    nome:"",
-    prezzo:"",
-    colore:"",
-    forma:"",
-    incisione:"",
-    testo:"",
-    immagine:"",
-    anello:"",
-    quantita:1
+colore:"",
+forma:"",
+incisione:"",
+testo:"",
+anello:"",
+immagine:""
 
 };
 
@@ -35,47 +36,73 @@ let configurazione = {
 
 
 
+
 fetch(API_URL)
 
-.then(response => response.json())
-
-.then(prodotti => {
+.then(response=>{
 
 
-    const prodotto = prodotti.find(
-        p => p.ID == idProdotto
-    );
+if(!response.ok){
+
+throw new Error("Errore caricamento prodotti");
+
+}
 
 
-    if(!prodotto){
-
-        nome.innerHTML = "Prodotto non trovato";
-
-        return;
-
-    }
-
-
-
-    configurazione.id = prodotto.ID;
-
-    configurazione.nome = prodotto.Nome;
-
-    configurazione.prezzo = prodotto.Prezzo;
-
-
-
-    mostraProdotto(prodotto);
+return response.json();
 
 
 })
 
-.catch(error => {
 
-    console.error(
-        "Errore:",
-        error
-    );
+.then(prodotti=>{
+
+
+
+const prodotto = prodotti.find(
+
+p => Number(p.ID) === Number(idProdotto)
+
+);
+
+
+
+if(!prodotto){
+
+throw new Error("Prodotto non trovato");
+
+}
+
+
+
+prodottoCorrente = prodotto;
+
+
+
+mostraProdotto(prodotto);
+
+
+
+})
+
+
+.catch(error=>{
+
+
+console.error(
+"Errore:",
+error
+);
+
+
+
+if(area){
+
+area.innerHTML =
+"<p>Errore caricamento prodotto</p>";
+
+}
+
 
 });
 
@@ -91,242 +118,158 @@ function mostraProdotto(prodotto){
 
 
 
-nome.innerHTML = prodotto.Nome;
+if(nome){
+
+nome.innerHTML =
+prodotto.Nome;
+
+}
 
 
 
 area.innerHTML = `
 
 
-
-<h3>Personalizza il tuo prodotto</h3>
-
+<div class="box-personalizzazione">
 
 
-<h4>Colore</h4>
+<h3>Colore</h3>
 
-<div>
-
-${creaBottoni(prodotto.Colori,"colore")}
-
-</div>
+<select id="colore">
 
 
-
-<h4>Forma</h4>
-
-<div>
-
-${creaBottoni(prodotto.Forme,"forma")}
-
-</div>
+<option value="Verde">
+Verde
+</option>
 
 
-
-<h4>Incisione</h4>
-
-
-<label>
-
-<input 
-type="radio"
-name="incisione"
-onchange="scegliIncisione('Testo')">
-
-Testo
-
-</label>
+<option value="Nero">
+Nero
+</option>
 
 
+<option value="Blu">
+Blu
+</option>
 
-<label>
 
-<input 
-type="radio"
-name="incisione"
-onchange="scegliIncisione('Immagine')">
-
-Immagine
-
-</label>
+</select>
 
 
 
 
-<h4>Testo incisione</h4>
+
+<h3>Forma</h3>
+
+
+<select id="forma">
+
+
+<option value="Cuore">
+Cuore
+</option>
+
+
+<option value="Rotondo">
+Rotondo
+</option>
+
+
+</select>
+
+
+
+
+
+
+<h3>Incisione</h3>
+
+
+<select id="incisione">
+
+
+<option value="Nessuna">
+Nessuna
+</option>
+
+
+<option value="Testo">
+Testo inciso
+</option>
+
+
+</select>
+
+
+
 
 
 <input
 
-type="text"
+id="testo"
 
 placeholder="Scrivi il testo"
 
-oninput="aggiornaTesto(this.value)"
-
 >
 
 
 
 
 
-<h4>Carica immagine</h4>
 
 
-<input
-
-type="file"
-
-accept="image/*"
-
-onchange="caricaImmagine(event)"
-
->
+<h3>Anello</h3>
 
 
+<select id="anello">
 
 
+<option value="Nero">
+Nero
+</option>
 
-<h4>Colore anello</h4>
+
+<option value="Grigio">
+Grigio
+</option>
 
 
-<div>
-
-${creaBottoni(prodotto.ColoreAnello,"anello")}
-
-</div>
+</select>
 
 
 
 
-<br>
 
+<button id="aggiungi">
 
-<button
-
-class="main-button"
-
-onclick="salvaConfigurazione()">
 
 Aggiungi al carrello
 
 </button>
 
 
+
+</div>
+
+
 `;
 
 
-
-
-
-if(prodotto.ImmagineBase){
-
-
-document.getElementById(
-"immagine-prodotto"
-).src =
-
-"images/prodotti/portachiavi/" +
-prodotto.ImmagineBase;
-
-
-}
-
-
-}
-
-
-
-
-
-
-
-
-
-function creaBottoni(lista,tipo){
-
-
-
-if(!lista){
-
-return "";
-
-}
-
-
-
-return lista
-
-.split(",")
-
-.map(elemento => {
-
-
-return `
-
-<button
-
-class="option"
-
-onclick="selezionaOpzione('${tipo}','${elemento}',this)"
-
->
-
-${elemento}
-
-</button>
-
-`;
-
-})
-
-.join("");
-
-
-
-}
-
-
-
-
-
-
-
-
-function selezionaOpzione(tipo,valore,bottone){
 
 
 
 document
-.querySelectorAll(".option")
-.forEach(btn=>{
+.getElementById("aggiungi")
+.addEventListener(
 
-btn.classList.remove(
-"selezionato"
-);
+"click",
 
-});
+aggiungiCarrello
 
-
-
-bottone.classList.add(
-"selezionato"
 );
 
 
 
-configurazione[tipo]=valore;
-
-
-
-if(tipo=="colore"){
-
-cambiaImmagineColore(valore);
-
-}
-
-
-
 }
 
 
@@ -336,151 +279,41 @@ cambiaImmagineColore(valore);
 
 
 
-function cambiaImmagineColore(colore){
 
+function aggiungiCarrello(){
 
 
-let immagine =
-document.getElementById(
-"immagine-prodotto"
-);
 
+configurazione.colore =
 
+document.getElementById("colore").value;
 
-if(!immagine){
 
-return;
 
-}
+configurazione.forma =
 
+document.getElementById("forma").value;
 
 
-immagine.src =
 
-"images/prodotti/portachiavi/" +
+configurazione.incisione =
 
-colore.toLowerCase().trim()
+document.getElementById("incisione").value;
 
-+
 
-".png";
 
+configurazione.testo =
 
-}
+document.getElementById("testo").value;
 
 
 
+configurazione.anello =
 
+document.getElementById("anello").value;
 
 
 
-
-function scegliIncisione(tipo){
-
-
-configurazione.incisione = tipo;
-
-
-}
-
-
-
-
-
-
-
-
-function aggiornaTesto(testo){
-
-
-let anteprima =
-document.getElementById(
-"testo-incisione"
-);
-
-
-
-if(anteprima){
-
-anteprima.innerHTML = testo;
-
-}
-
-
-
-configurazione.testo = testo;
-
-
-}
-
-
-
-
-
-
-
-
-function caricaImmagine(event){
-
-
-
-let file =
-event.target.files[0];
-
-
-
-if(!file){
-
-return;
-
-}
-
-
-
-let lettore =
-new FileReader();
-
-
-
-lettore.onload=function(e){
-
-
-
-let img =
-document.getElementById(
-"immagine-caricata"
-);
-
-
-
-img.src=e.target.result;
-
-
-img.style.display="block";
-
-
-
-configurazione.immagine =
-e.target.result;
-
-
-};
-
-
-
-lettore.readAsDataURL(file);
-
-
-}
-
-
-
-
-
-
-
-
-function salvaConfigurazione(){
 
 
 
@@ -493,12 +326,69 @@ localStorage.getItem("carrello")
 
 
 
-carrello.push({
 
-...configurazione
+let prodotto = {
 
-});
 
+id:
+
+prodottoCorrente.ID,
+
+
+nome:
+
+prodottoCorrente.Nome,
+
+
+prezzo:
+
+Number(prodottoCorrente.Prezzo),
+
+
+
+colore:
+
+configurazione.colore,
+
+
+forma:
+
+configurazione.forma,
+
+
+incisione:
+
+configurazione.incisione,
+
+
+testo:
+
+configurazione.testo,
+
+
+anello:
+
+configurazione.anello,
+
+
+immagine:
+
+prodottoCorrente.Immagine,
+
+
+quantita:
+
+1
+
+
+
+};
+
+
+
+
+
+carrello.push(prodotto);
 
 
 
@@ -512,8 +402,18 @@ JSON.stringify(carrello)
 
 
 
+
+alert(
+
+"Prodotto aggiunto al carrello"
+
+);
+
+
+
 window.location.href =
 "carrello.html";
+
 
 
 }
