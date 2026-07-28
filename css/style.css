@@ -626,3 +626,54 @@ box-shadow:
 font-size:18px;
 
 }
+
+.order-page{
+
+padding:60px 8%;
+
+max-width:700px;
+
+margin:auto;
+
+}
+
+
+
+.order-page input,
+.order-page textarea{
+
+width:100%;
+
+padding:15px;
+
+margin:10px 0;
+
+border-radius:12px;
+
+border:none;
+
+font-size:16px;
+
+}
+
+
+
+.order-page textarea{
+
+height:120px;
+
+}
+
+
+
+.ordine-prodotto{
+
+background:#1f2937;
+
+padding:20px;
+
+border-radius:20px;
+
+margin:15px 0;
+
+}
