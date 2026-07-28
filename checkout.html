@@ -1,1 +1,258 @@
+<!DOCTYPE html>
+<html lang="it">
 
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Checkout | NFC Store</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+<header class="navbar">
+
+
+<div class="logo">
+🌿 NFC STORE
+</div>
+
+
+<a href="index.html" class="cart">
+
+← Continua acquisti
+
+</a>
+
+
+</header>
+
+
+
+
+
+
+
+
+<section class="checkout">
+
+
+
+<h1>
+
+Completa il tuo ordine
+
+</h1>
+
+
+
+
+
+<div class="checkout-grid">
+
+
+
+
+
+<div class="card">
+
+
+<h2>
+Il tuo prodotto
+</h2>
+
+
+
+<div id="checkoutProduct"
+class="checkoutProduct">
+
+🔑
+
+</div>
+
+
+
+
+<p id="productInfo">
+
+</p>
+
+
+
+<h2>
+
+Totale:
+€<span id="checkoutTotal">
+0
+
+</span>
+
+</h2>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<div class="card">
+
+
+<h2>
+
+Dati spedizione
+
+</h2>
+
+
+
+
+<form id="checkoutForm">
+
+
+
+<input 
+name="nome"
+placeholder="Nome"
+required>
+
+
+
+<input 
+name="cognome"
+placeholder="Cognome"
+required>
+
+
+
+<input 
+name="telefono"
+placeholder="Telefono"
+required>
+
+
+
+<input 
+name="indirizzo"
+placeholder="Indirizzo"
+required>
+
+
+
+<input 
+name="citta"
+placeholder="Città"
+required>
+
+
+
+<input 
+name="cap"
+placeholder="CAP"
+required>
+
+
+
+
+
+
+<div class="paymentBox">
+
+
+<h3>
+
+Pagamento
+
+</h3>
+
+
+<label>
+
+<input 
+type="radio"
+checked
+disabled>
+
+💵 Pagamento alla consegna
+
+
+</label>
+
+
+<p>
+
+Metodo obbligatorio
+
+</p>
+
+
+</div>
+
+
+
+
+
+
+<textarea
+
+name="note"
+
+placeholder="Note aggiuntive">
+
+</textarea>
+
+
+
+
+
+
+
+<button class="mainBtn">
+
+Conferma ordine
+
+</button>
+
+
+
+</form>
+
+
+
+<p id="message"></p>
+
+
+
+</div>
+
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+<script src="script.js"></script>
+
+
+</body>
+
+</html>
