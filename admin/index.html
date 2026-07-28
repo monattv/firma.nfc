@@ -1,65 +1,70 @@
 <!DOCTYPE html>
-
 <html lang="it">
 
 <head>
 
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Admin Firma NFC</title>
+<title>Firma NFC - Admin</title>
 
 <link rel="stylesheet" href="admin.css">
 
 </head>
 
-
 <body>
 
+<div class="background"></div>
 
-<div class="login-box">
+<div class="login-card">
 
+    <div class="logo">
+        Firma<span>NFC</span>
+    </div>
 
-<h1>
-Firma NFC
-</h1>
+    <p class="subtitle">
+        Dashboard Amministratore
+    </p>
 
+    <div class="input-group">
 
-<h2>
-Area Admin
-</h2>
+        <label>Username</label>
 
+        <input
+            id="username"
+            type="text"
+            autocomplete="username"
+            placeholder="Inserisci username">
 
+    </div>
 
-<input 
-id="username"
-placeholder="Username">
+    <div class="input-group">
 
+        <label>Password</label>
 
+        <input
+            id="password"
+            type="password"
+            autocomplete="current-password"
+            placeholder="Inserisci password">
 
-<input 
-id="password"
-type="password"
-placeholder="Password">
+    </div>
 
+    <button id="loginBtn" onclick="login()">
 
+        <span id="btnText">
+            Accedi
+        </span>
 
-<button onclick="login()">
-Accedi
-</button>
+        <span id="loader" class="loader"></span>
 
+    </button>
 
-
-<p id="errore"></p>
-
+    <div id="status" class="status"></div>
 
 </div>
 
-
-
 <script src="admin.js"></script>
-
 
 </body>
 
