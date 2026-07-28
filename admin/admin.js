@@ -3,32 +3,42 @@ const API_URL =
 
 
 
-function caricaOrdini(){
+function login(){
 
 
-fetch(API_URL + "?azione=ordini")
+const username =
+document.getElementById("username").value.trim();
 
 
-.then(response=>response.json())
+const password =
+document.getElementById("password").value.trim();
 
 
-.then(ordini=>{
+const button =
+document.getElementById("loginBtn");
 
 
-let contenitore =
-document.getElementById("ordini");
+const btnText =
+document.getElementById("btnText");
+
+
+const loader =
+document.getElementById("loader");
+
+
+const status =
+document.getElementById("status");
 
 
 
-contenitore.innerHTML="";
 
 
+if(username === "" || password === ""){
 
-if(ordini.length === 0){
 
+status.innerHTML =
+"⚠ Inserisci username e password";
 
-contenitore.innerHTML =
-"<p>Nessun ordine trovato</p>";
 
 return;
 
@@ -38,72 +48,210 @@ return;
 
 
 
-ordini.forEach(ordine=>{
 
+// avvio caricamento
 
-contenitore.innerHTML += `
+button.disabled = true;
 
-<div class="ordine-box">
+btnText.innerHTML =
+"Accesso in corso";
 
-<h3>
-${ordine["ID Ordine"]}
-</h3>
+loader.classList.add(
+"show-loader"
+);
 
-
-<p>
-Cliente:
-${ordine.Nome}
-${ordine.Cognome}
-</p>
-
-
-<p>
-Telefono:
-${ordine.Telefono}
-</p>
-
-
-<p>
-Prodotti:
-<br>
-${ordine.Prodotti}
-</p>
-
-
-<p>
-Totale:
-${ordine.Totale} €
-</p>
-
-
-<p>
-Stato:
-${ordine.Stato}
-</p>
-
-
-</div>
-
-`;
+status.innerHTML =
+"Connessione al server...";
 
 
 
-});
+
+
+
+
+let controlloTimeout = setTimeout(()=>{
+
+
+button.disabled=false;
+
+
+btnText.innerHTML =
+"Accedi";
+
+
+loader.classList.remove(
+"show-loader"
+);
+
+
+status.innerHTML =
+"⚠ Il server non risponde. Riprova.";
+
+
+
+},10000);
+
+
+
+
+
+
+
+fetch(API_URL,{
+
+method:"POST",
+
+body:JSON.stringify({
+
+tipo:"login",
+
+username:username,
+
+password:password
+
+})
 
 
 })
 
 
+
+.then(response=>{
+
+
+status.innerHTML =
+"Risposta ricevuta...";
+
+
+return response.text();
+
+
+})
+
+
+
+.then(testo=>{
+
+
+clearTimeout(controlloTimeout);
+
+
+
+
+console.log(
+"RISPOSTA SERVER:",
+testo
+);
+
+
+
+
+let risultato;
+
+
+
+try{
+
+
+risultato =
+JSON.parse(testo);
+
+
+}
+
+catch(e){
+
+
+throw new Error(
+"La risposta del server non è JSON"
+);
+
+
+}
+
+
+
+
+
+if(risultato.success){
+
+
+
+status.innerHTML =
+"✅ Accesso effettuato";
+
+
+localStorage.setItem(
+"adminLogin",
+"true"
+);
+
+
+
+setTimeout(()=>{
+
+
+window.location.href =
+"dashboard.html";
+
+
+},800);
+
+
+
+
+}
+
+else{
+
+
+throw new Error(
+"Username o password errati"
+);
+
+
+}
+
+
+
+})
+
+
+
 .catch(error=>{
 
 
+clearTimeout(controlloTimeout);
+
+
+
 console.error(
-"Errore caricamento ordini:",
+"ERRORE LOGIN:",
 error
 );
 
 
+
+button.disabled=false;
+
+
+btnText.innerHTML =
+"Accedi";
+
+
+loader.classList.remove(
+"show-loader"
+);
+
+
+
+status.innerHTML =
+"❌ " + error.message;
+
+
+
 });
+
 
 
 }
