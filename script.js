@@ -1,33 +1,91 @@
+// ===============================
+// CONFIGURAZIONE PRODOTTO
+// ===============================
+
+
 let product = {
 
-forma:"Rotondo",
+    nome: "Portachiavi NFC Base",
 
-colore:"Nero",
+    forma: "Rotondo",
 
-coloreHex:"#111",
+    colore: "Nero",
 
-quantita:1,
+    coloreHex: "#111111",
 
-prezzo:19.99,
+    quantita: 1,
 
-descrizione:"",
+    prezzo: 19.99,
 
-foto:""
+    descrizione: "",
+
+    foto: ""
 
 };
 
 
 
 
+// ===============================
+// APRI CONFIGURATORE
+// ===============================
+
+
+function openProduct(button){
+
+
+    animateCart();
+
+
+    setTimeout(()=>{
+
+        window.location.href="prodotto.html";
+
+    },300);
+
+
+}
+
+
+
+
+
+
+// ===============================
+// SCELTA FORMA
+// ===============================
 
 
 function setShape(shape){
 
 
-product.forma=shape;
+    product.forma = shape;
 
 
-updateProduct();
+    updatePreview();
+
+
+}
+
+
+
+
+
+
+// ===============================
+// SCELTA COLORE
+// ===============================
+
+
+function setColor(nome, colore){
+
+
+    product.colore = nome;
+
+    product.coloreHex = colore;
+
+
+    updatePreview();
 
 
 }
@@ -37,105 +95,132 @@ updateProduct();
 
 
 
-function setColor(name,hex){
-
-
-product.colore=name;
-
-product.coloreHex=hex;
-
-
-updateProduct();
-
-
-}
-
-
-
-
+// ===============================
+// QUANTITA
+// ===============================
 
 
 function changeQty(value){
 
 
-product.quantita += value;
+    product.quantita += value;
 
 
 
-if(product.quantita < 1){
+    if(product.quantita < 1){
 
-product.quantita=1;
+        product.quantita = 1;
+
+    }
+
+
+
+    let quantity =
+    document.getElementById("quantity");
+
+
+
+    if(quantity){
+
+        quantity.innerHTML =
+        product.quantita;
+
+    }
+
+
+
+    updatePreview();
+
 
 }
 
 
-document.getElementById("qty").innerHTML=
-product.quantita;
-
-
-updateProduct();
-
-
-}
 
 
 
 
+// ===============================
+// AGGIORNA ANTEPRIMA
+// ===============================
+
+
+function updatePreview(){
 
 
 
-function updateProduct(){
+let box =
+document.getElementById("customProduct");
 
 
 
-let box=document.getElementById("customProduct");
+if(!box) return;
 
 
 
-if(!box)return;
 
-
-
-box.style.background=
+box.style.background =
 product.coloreHex;
 
 
 
 
-if(product.forma==="Rotondo"){
+switch(product.forma){
+
+
+case "Rotondo":
 
 box.style.borderRadius="50%";
 
-}
+break;
 
 
-if(product.forma==="Quadrato"){
+
+case "Quadrato":
 
 box.style.borderRadius="20px";
 
-}
+break;
 
 
 
-if(product.forma==="Esagonale"){
+case "Rettangolare":
+
+box.style.borderRadius="15px";
+
+box.style.width="280px";
+
+break;
+
+
+
+case "Esagonale":
 
 box.style.borderRadius="35%";
 
-}
+break;
 
 
 
-
-if(product.forma==="Personalizzata"){
+case "Personalizzata":
 
 box.style.borderRadius="10px";
 
+break;
+
+
 }
 
 
 
 
-document.getElementById("previewName").innerHTML=
+let title =
+document.getElementById("previewTitle");
+
+
+
+if(title){
+
+title.innerHTML =
 
 "Portachiavi "
 +
@@ -145,29 +230,51 @@ product.forma
 +
 product.colore;
 
+}
 
 
 
-document.getElementById("summary").innerHTML=
+
+
+let summary =
+document.getElementById("summary");
+
+
+
+if(summary){
+
+summary.innerHTML =
 
 product.forma
 +
-" - "
+" | "
 +
 product.colore
 +
-"<br>"
-+
-"Quantità: "
+" | Quantità "
 +
 product.quantita;
 
+}
 
 
-document.getElementById("total").innerHTML=
+
+
+
+let price =
+document.getElementById("price");
+
+
+
+if(price){
+
+price.innerHTML =
 
 (product.prezzo * product.quantita)
 .toFixed(2);
+
+}
+
 
 
 }
@@ -179,22 +286,44 @@ document.getElementById("total").innerHTML=
 
 
 
+// ===============================
+// AGGIUNGI AL CARRELLO
+// ===============================
+
 
 function addCart(){
 
 
+
+let text =
+document.getElementById("description");
+
+
+
+if(text){
+
 product.descrizione =
-document.getElementById("description").value;
+text.value;
+
+}
+
 
 
 
 let file =
-document.getElementById("image").files[0];
+document.getElementById("image");
 
+
+
+if(file && file.files[0]){
 
 
 product.foto =
-file ? file.name : "nessuna";
+file.files[0].name;
+
+
+}
+
 
 
 
@@ -210,8 +339,18 @@ JSON.stringify(product)
 
 
 
+animateCart();
 
-window.location.href="checkout.html";
+
+
+setTimeout(()=>{
+
+
+window.location.href="cart.html";
+
+
+},600);
+
 
 
 }
@@ -219,58 +358,150 @@ window.location.href="checkout.html";
 
 
 
-// CARICAMENTO CHECKOUT
+
+
+
+
+
+// ===============================
+// ANIMAZIONE CARRELLO
+// ===============================
+
+
+function animateCart(){
+
+
+let cart =
+document.querySelector(".cart");
+
+
+
+if(cart){
+
+
+cart.style.transform="scale(1.15)";
+
+
+
+setTimeout(()=>{
+
+cart.style.transform="scale(1)";
+
+},300);
+
+
+}
+
+
+}
+
+
+
+
+
+
+
+
+
+// ===============================
+// CHECKOUT
+// ===============================
 
 
 let savedProduct =
-JSON.parse(localStorage.getItem("cart"));
+
+JSON.parse(
+localStorage.getItem("cart")
+);
 
 
 
-if(savedProduct && document.getElementById("productInfo")){
 
 
-document.getElementById("productInfo").innerHTML=
+
+if(savedProduct){
+
+
+
+let details =
+document.getElementById("orderDetails");
+
+
+
+if(details){
+
+
+details.innerHTML =
 
 `
-Forma: ${savedProduct.forma}<br>
-Colore: ${savedProduct.colore}<br>
-Quantità: ${savedProduct.quantita}<br>
+<strong>${savedProduct.nome}</strong>
+<br><br>
+
+Forma:
+${savedProduct.forma}
+
+<br>
+
+Colore:
+${savedProduct.colore}
+
+<br>
+
+Quantità:
+${savedProduct.quantita}
+
+<br>
+
 Personalizzazione:
 ${savedProduct.descrizione || "Nessuna"}
+
 `;
 
 
 
-document.getElementById("checkoutTotal").innerHTML=
+}
+
+
+
+
+let total =
+document.getElementById("checkoutTotal");
+
+
+
+if(total){
+
+
+total.innerHTML =
 
 (
 savedProduct.prezzo *
 savedProduct.quantita
+
 ).toFixed(2);
 
 
+}
 
-let box=document.getElementById("checkoutProduct");
 
 
-box.style.background=
+
+let preview =
+document.getElementById("orderPreview");
+
+
+
+if(preview){
+
+
+preview.style.background =
+
 savedProduct.coloreHex;
 
 
 
-if(savedProduct.forma==="Quadrato"){
-
-box.style.borderRadius="20px";
-
 }
 
-
-if(savedProduct.forma==="Esagonale"){
-
-box.style.borderRadius="35%";
-
-}
 
 
 }
@@ -283,13 +514,16 @@ box.style.borderRadius="35%";
 
 
 
+// ===============================
+// INVIO ORDINE GOOGLE SHEET
+// ===============================
 
 
-// INVIO ORDINE
+let checkoutForm =
 
-
-const checkoutForm =
 document.getElementById("checkoutForm");
+
+
 
 
 
@@ -298,7 +532,9 @@ if(checkoutForm){
 
 
 checkoutForm.addEventListener(
+
 "submit",
+
 async function(e){
 
 
@@ -306,52 +542,90 @@ e.preventDefault();
 
 
 
+
 let cliente =
+
 Object.fromEntries(
-new FormData(checkoutForm).entries()
+
+new FormData(checkoutForm)
+
+.entries()
+
 );
 
 
 
 
-let ordine={
+
+
+let ordine = {
+
+
+data:
+
+new Date()
+.toLocaleString("it-IT"),
+
 
 
 ...cliente,
 
 
+
 prodotto:
+
+savedProduct.nome,
+
+
+
+forma:
+
 savedProduct.forma,
 
 
+
 colore:
+
 savedProduct.colore,
 
 
+
 quantita:
+
 savedProduct.quantita,
 
 
+
 personalizzazione:
+
 savedProduct.descrizione,
 
 
+
 foto:
+
 savedProduct.foto,
 
 
+
 pagamento:
+
 "Pagamento alla consegna",
 
 
+
 totale:
+
 (
 savedProduct.prezzo *
 savedProduct.quantita
+
 ).toFixed(2)
 
 
+
 };
+
 
 
 
@@ -378,6 +652,7 @@ headers:{
 
 
 "Content-Type":
+
 "text/plain;charset=utf-8"
 
 
@@ -385,6 +660,7 @@ headers:{
 
 
 body:
+
 JSON.stringify(ordine)
 
 
@@ -396,13 +672,14 @@ JSON.stringify(ordine)
 
 
 
+
+
+
 localStorage.removeItem("cart");
 
 
 
-window.location.href=
-"successo.html";
-
+window.location.href="successo.html";
 
 
 
@@ -413,9 +690,18 @@ catch(error){
 
 
 
-document.getElementById("message").innerHTML=
+let msg =
+document.getElementById("message");
 
-"❌ Errore durante l'invio";
+
+
+if(msg){
+
+msg.innerHTML =
+"❌ Errore invio ordine";
+
+}
+
 
 
 console.log(error);
@@ -426,7 +712,10 @@ console.log(error);
 
 
 
-});
+}
 
+
+
+);
 
 }
