@@ -4,7 +4,6 @@
 <head>
 
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Checkout | NFC Store</title>
@@ -19,15 +18,14 @@
 
 <header class="navbar">
 
-
 <div class="logo">
 🌿 NFC STORE
 </div>
 
 
-<a href="index.html" class="cart">
+<a href="cart.html" class="cart">
 
-← Continua acquisti
+🛒 Carrello
 
 </a>
 
@@ -39,29 +37,24 @@
 
 
 
-
-
 <section class="checkout">
 
 
-
 <h1>
-
 Completa il tuo ordine
-
 </h1>
 
 
 
 
 
-<div class="checkout-grid">
+<div class="checkoutGrid">
 
 
 
 
 
-<div class="card">
+<div class="card orderBox">
 
 
 <h2>
@@ -70,8 +63,7 @@ Il tuo prodotto
 
 
 
-<div id="checkoutProduct"
-class="checkoutProduct">
+<div id="orderPreview">
 
 🔑
 
@@ -79,22 +71,23 @@ class="checkoutProduct">
 
 
 
+<div id="orderDetails">
 
-<p id="productInfo">
-
-</p>
-
+</div>
 
 
-<h2>
+
+<div class="totalBox">
 
 Totale:
+
+<strong>
 €<span id="checkoutTotal">
 0
-
 </span>
+</strong>
 
-</h2>
+</div>
 
 
 
@@ -112,9 +105,7 @@ Totale:
 
 
 <h2>
-
-Dati spedizione
-
+Dati consegna
 </h2>
 
 
@@ -124,42 +115,48 @@ Dati spedizione
 
 
 
-<input 
+<input
+type="text"
 name="nome"
 placeholder="Nome"
 required>
 
 
 
-<input 
+<input
+type="text"
 name="cognome"
 placeholder="Cognome"
 required>
 
 
 
-<input 
+<input
+type="tel"
 name="telefono"
 placeholder="Telefono"
 required>
 
 
 
-<input 
+<input
+type="text"
 name="indirizzo"
 placeholder="Indirizzo"
 required>
 
 
 
-<input 
+<input
+type="text"
 name="citta"
 placeholder="Città"
 required>
 
 
 
-<input 
+<input
+type="text"
 name="cap"
 placeholder="CAP"
 required>
@@ -173,30 +170,31 @@ required>
 
 
 <h3>
-
-Pagamento
-
+Metodo di pagamento
 </h3>
 
 
-<label>
+<div class="paymentActive">
 
-<input 
+
+<input
 type="radio"
 checked
 disabled>
 
+
 💵 Pagamento alla consegna
 
 
-</label>
+</div>
 
 
-<p>
 
-Metodo obbligatorio
+<small>
 
-</p>
+Unico metodo disponibile
+
+</small>
 
 
 </div>
@@ -206,12 +204,10 @@ Metodo obbligatorio
 
 
 
+
 <textarea
-
 name="note"
-
 placeholder="Note aggiuntive">
-
 </textarea>
 
 
@@ -220,7 +216,8 @@ placeholder="Note aggiuntive">
 
 
 
-<button class="mainBtn">
+<button
+class="mainBtn checkoutBtn">
 
 Conferma ordine
 
@@ -228,8 +225,8 @@ Conferma ordine
 
 
 
-</form>
 
+</form>
 
 
 <p id="message"></p>
@@ -237,6 +234,7 @@ Conferma ordine
 
 
 </div>
+
 
 
 
