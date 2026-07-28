@@ -215,3 +215,218 @@ window.location.href="checkout.html";
 
 
 }
+
+
+
+
+// CARICAMENTO CHECKOUT
+
+
+let savedProduct =
+JSON.parse(localStorage.getItem("cart"));
+
+
+
+if(savedProduct && document.getElementById("productInfo")){
+
+
+document.getElementById("productInfo").innerHTML=
+
+`
+Forma: ${savedProduct.forma}<br>
+Colore: ${savedProduct.colore}<br>
+Quantità: ${savedProduct.quantita}<br>
+Personalizzazione:
+${savedProduct.descrizione || "Nessuna"}
+`;
+
+
+
+document.getElementById("checkoutTotal").innerHTML=
+
+(
+savedProduct.prezzo *
+savedProduct.quantita
+).toFixed(2);
+
+
+
+let box=document.getElementById("checkoutProduct");
+
+
+box.style.background=
+savedProduct.coloreHex;
+
+
+
+if(savedProduct.forma==="Quadrato"){
+
+box.style.borderRadius="20px";
+
+}
+
+
+if(savedProduct.forma==="Esagonale"){
+
+box.style.borderRadius="35%";
+
+}
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+// INVIO ORDINE
+
+
+const checkoutForm =
+document.getElementById("checkoutForm");
+
+
+
+if(checkoutForm){
+
+
+
+checkoutForm.addEventListener(
+"submit",
+async function(e){
+
+
+e.preventDefault();
+
+
+
+let cliente =
+Object.fromEntries(
+new FormData(checkoutForm).entries()
+);
+
+
+
+
+let ordine={
+
+
+...cliente,
+
+
+prodotto:
+savedProduct.forma,
+
+
+colore:
+savedProduct.colore,
+
+
+quantita:
+savedProduct.quantita,
+
+
+personalizzazione:
+savedProduct.descrizione,
+
+
+foto:
+savedProduct.foto,
+
+
+pagamento:
+"Pagamento alla consegna",
+
+
+totale:
+(
+savedProduct.prezzo *
+savedProduct.quantita
+).toFixed(2)
+
+
+};
+
+
+
+
+
+
+try{
+
+
+await fetch(
+
+"https://script.google.com/macros/s/AKfycbyngEx24SuA0n7FDfbQ7QWaYdGK8TNGIu3njAdSkBUy21ZaL4ePcKMBYOqHFT2zGu0liw/exec",
+
+{
+
+
+method:"POST",
+
+
+redirect:"follow",
+
+
+headers:{
+
+
+"Content-Type":
+"text/plain;charset=utf-8"
+
+
+},
+
+
+body:
+JSON.stringify(ordine)
+
+
+
+}
+
+);
+
+
+
+
+localStorage.removeItem("cart");
+
+
+
+window.location.href=
+"successo.html";
+
+
+
+
+
+}
+
+catch(error){
+
+
+
+document.getElementById("message").innerHTML=
+
+"❌ Errore durante l'invio";
+
+
+console.log(error);
+
+
+
+}
+
+
+
+});
+
+
+}
