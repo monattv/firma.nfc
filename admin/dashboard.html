@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="it">
 
 <head>
@@ -8,7 +7,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Dashboard Firma NFC</title>
+<title>Firma NFC - Dashboard</title>
 
 <link rel="stylesheet" href="admin.css">
 
@@ -18,21 +17,51 @@
 <body>
 
 
-<div class="dashboard">
+<div class="dashboard-container">
+
+
+
+<header class="dashboard-header">
+
+
+<div class="logo">
+Firma<span>NFC</span>
+</div>
 
 
 <h1>
-Dashboard Firma NFC
+Dashboard Amministratore
 </h1>
 
 
 
-<div class="box">
+<button onclick="logout()" class="logout">
+
+Esci
+
+</button>
 
 
-<h2>
-Ordini
-</h2>
+</header>
+
+
+
+
+
+
+<section class="cards">
+
+
+
+<div class="card">
+
+<h3>
+📦 Ordini
+</h3>
+
+<p>
+Gestisci gli ordini ricevuti
+</p>
 
 
 <button onclick="caricaOrdini()">
@@ -42,23 +71,21 @@ Visualizza ordini
 </button>
 
 
-<div id="ordini">
-
-</div>
-
-
 </div>
 
 
 
 
 
-<div class="box">
+<div class="card">
 
+<h3>
+🛒 Prodotti
+</h3>
 
-<h2>
-Prodotti
-</h2>
+<p>
+Gestisci prodotti e disponibilità
+</p>
 
 
 <button>
@@ -74,11 +101,32 @@ Gestisci prodotti
 
 
 
-<button onclick="logout()">
+</section>
 
-Esci
 
-</button>
+
+
+
+
+
+
+<section class="ordini-section">
+
+
+<h2>
+Lista ordini
+</h2>
+
+
+<div id="ordini">
+
+</div>
+
+
+</section>
+
+
+
 
 
 
@@ -88,32 +136,42 @@ Esci
 
 
 
-<script src="admin.js"></script>
+
+
+
+<script src="dashboard.js"></script>
+
 
 
 <script>
 
 
-if(localStorage.getItem("adminLogin")!=="true"){
+if(localStorage.getItem("adminLogin") !== "true"){
+
 
 window.location.href="index.html";
 
-}
 
+}
 
 
 
 
 function logout(){
 
+
 localStorage.removeItem("adminLogin");
 
+
 window.location.href="index.html";
+
 
 }
 
 
+
 </script>
+
 
 
 </body>
