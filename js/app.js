@@ -102,11 +102,11 @@ function mostraProdotti(prodotti){
 
 
 
-            <button>
+            <button onclick="apriProdotto('${prodotto.ID}')">
 
-            Personalizza
+Personalizza
 
-            </button>
+</button>
 
 
 
@@ -156,5 +156,13 @@ function formattaPrezzo(prezzo){
     return prezzo;
 
 
+
+}
+
+
+function apriProdotto(id){
+
+    window.location.href = 
+    `prodotto.html?id=${id}`;
 
 }
