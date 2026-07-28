@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+
+<html lang="it">
+
+
+<head>
+
+
+<meta charset="UTF-8">
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<title>Dashboard Firma NFC</title>
+
+
+<link rel="stylesheet" href="admin.css">
+
+
+</head>
+
+
+
+<body>
+
+
+<div class="dashboard">
+
+
+<h1>
+
+Dashboard Firma NFC
+
+</h1>
+
+
+
+<div class="box">
+
+
+<h2>
+
+Benvenuto Admin
+
+</h2>
+
+
+<p>
+
+Sei entrato nella gestione del sito.
+
+</p>
+
+
+</div>
+
+
+
+
+<div class="box">
+
+
+<h2>
+Ordini
+</h2>
+
+
+<button>
+
+Visualizza ordini
+
+</button>
+
+
+</div>
+
+
+
+
+
+<div class="box">
+
+
+<h2>
+Prodotti
+</h2>
+
+
+<button>
+
+Gestisci prodotti
+
+</button>
+
+
+</div>
+
+
+
+
+
+<button onclick="logout()">
+
+Esci
+
+</button>
+
+
+
+</div>
+
+
+
+<script>
+
+
+if(localStorage.getItem("adminLogin")!=="true"){
+
+window.location.href="index.html";
+
+}
+
+
+
+function logout(){
+
+localStorage.removeItem("adminLogin");
+
+window.location.href="index.html";
+
+}
+
+
+</script>
+
+
+
+</body>
+
+
+</html>
