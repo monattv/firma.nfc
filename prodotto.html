@@ -1,1 +1,304 @@
+<!DOCTYPE html>
+<html lang="it">
 
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Personalizza NFC</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+<header class="navbar">
+
+<div class="logo">
+🌿 NFC STORE
+</div>
+
+
+<a class="cart" href="checkout.html">
+
+🛒 Carrello
+
+</a>
+
+</header>
+
+
+
+
+
+
+<section class="customizer">
+
+
+
+<div class="custom-left">
+
+
+<h1>
+Personalizza il tuo NFC
+</h1>
+
+
+
+<div class="previewBox">
+
+
+<div id="customProduct">
+
+🔑
+
+</div>
+
+
+<h2 id="previewName">
+Portachiavi Rotondo Nero
+</h2>
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<div class="custom-right">
+
+
+
+<div class="card">
+
+
+<h2>
+Forma
+</h2>
+
+
+<div class="options">
+
+
+<button onclick="setShape('Rotondo')">
+⭕
+<br>
+Rotondo
+</button>
+
+
+<button onclick="setShape('Quadrato')">
+⬛
+<br>
+Quadrato
+</button>
+
+
+<button onclick="setShape('Esagonale')">
+⬡
+<br>
+Esagonale
+</button>
+
+
+<button onclick="setShape('Personalizzata')">
+⭐
+<br>
+Personalizzata
+</button>
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<div class="card">
+
+
+<h2>
+Colore
+</h2>
+
+
+
+<div class="colorOptions">
+
+
+<div onclick="setColor('Nero','#111')" class="circle nero"></div>
+
+
+<div onclick="setColor('Verde','#10b981')" class="circle verde"></div>
+
+
+<div onclick="setColor('Bianco','#eee')" class="circle bianco"></div>
+
+
+<div onclick="setColor('Oro','#d4af37')" class="circle oro"></div>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<div class="card">
+
+
+<h2>
+Quantità
+</h2>
+
+
+<div class="quantity">
+
+
+<button onclick="changeQty(-1)">
+-
+</button>
+
+
+<span id="qty">
+1
+</span>
+
+
+<button onclick="changeQty(1)">
++
+</button>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<div class="card">
+
+
+<h2>
+Personalizzazione
+</h2>
+
+
+<textarea 
+id="description"
+placeholder="
+Scrivi come vuoi il tuo portachiavi:
+Nome, logo, frase, dettagli...
+"></textarea>
+
+
+
+
+<label class="upload">
+
+📷 Inserisci immagine
+
+<input 
+type="file"
+id="image">
+
+</label>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+<div class="summary">
+
+
+<h2>
+Riepilogo
+</h2>
+
+
+<p id="summary">
+
+Rotondo - Nero
+
+</p>
+
+
+<h2>
+
+€<span id="total">
+19,99
+
+</span>
+
+</h2>
+
+
+
+<button onclick="addCart()" class="mainBtn">
+
+Aggiungi al carrello
+
+</button>
+
+
+</div>
+
+
+
+</div>
+
+
+
+</section>
+
+
+
+
+<script src="script.js"></script>
+
+
+</body>
+
+</html>
