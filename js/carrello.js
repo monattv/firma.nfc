@@ -1,14 +1,15 @@
-const container =
-document.getElementById(
+const container = document.getElementById(
 "carrello-container"
 );
 
 
 
-let carrello =
-JSON.parse(
+let carrello = JSON.parse(
+
 localStorage.getItem("carrello")
+
 ) || [];
+
 
 
 
@@ -23,14 +24,19 @@ mostraCarrello();
 function mostraCarrello(){
 
 
-if(carrello.length===0){
+
+container.innerHTML="";
+
+
+
+if(carrello.length === 0){
 
 
 container.innerHTML = `
 
-<h3>
+<h2>
 Carrello vuoto
-</h3>
+</h2>
 
 `;
 
@@ -40,12 +46,7 @@ return;
 
 
 
-container.innerHTML="";
-
-
-
-let totale=0;
-
+let totale = 0;
 
 
 
@@ -53,12 +54,14 @@ carrello.forEach((prodotto,index)=>{
 
 
 
-let prezzo =
-Number(prodotto.prezzo);
+let prezzo = Number(
+prodotto.prezzo
+);
 
 
 
 totale += prezzo * prodotto.quantita;
+
 
 
 
@@ -69,8 +72,11 @@ container.innerHTML += `
 
 
 <h2>
+
 ${prodotto.nome}
+
 </h2>
+
 
 
 <p>
@@ -79,16 +85,19 @@ ${prodotto.colore || "-"}
 </p>
 
 
+
 <p>
 Forma:
 ${prodotto.forma || "-"}
 </p>
 
 
+
 <p>
 Testo:
 ${prodotto.testo || "-"}
 </p>
+
 
 
 <p>
@@ -119,24 +128,14 @@ ${prodotto.quantita}
 
 
 
+<button onclick="elimina(${index})">
 
-<h3>
-
-${prezzo.toFixed(2)} €
-
-</h3>
-
-
-
-<button onclick="rimuovi(${index})">
-
-Elimina
+Rimuovi
 
 </button>
 
 
 </div>
-
 
 
 `;
@@ -155,6 +154,7 @@ container.innerHTML += `
 <h2>
 
 Totale:
+
 ${totale.toFixed(2)} €
 
 </h2>
@@ -165,6 +165,8 @@ ${totale.toFixed(2)} €
 
 
 }
+
+
 
 
 
@@ -187,17 +189,22 @@ salva();
 
 
 
+
+
 function meno(index){
 
 
-if(carrello[index].quantita>1){
+
+if(carrello[index].quantita > 1){
 
 carrello[index].quantita--;
 
 }
 
 
+
 salva();
+
 
 
 }
@@ -206,16 +213,23 @@ salva();
 
 
 
-function rimuovi(index){
+
+
+
+function elimina(index){
 
 
 carrello.splice(index,1);
 
 
+
 salva();
 
 
 }
+
+
+
 
 
 
@@ -233,10 +247,14 @@ JSON.stringify(carrello)
 );
 
 
+
 mostraCarrello();
 
 
 }
+
+
+
 
 
 
