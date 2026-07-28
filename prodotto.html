@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Personalizza NFC</title>
+<title>Personalizza | NFC Store</title>
 
 <link rel="stylesheet" href="style.css">
 
@@ -18,18 +18,22 @@
 
 <header class="navbar">
 
+
 <div class="logo">
 🌿 NFC STORE
 </div>
 
 
-<a class="cart" href="checkout.html">
+<a href="cart.html" class="cart">
 
 🛒 Carrello
 
 </a>
 
+
 </header>
+
+
 
 
 
@@ -40,16 +44,13 @@
 
 
 
-<div class="custom-left">
+<div class="customPreview">
 
 
 <h1>
-Personalizza il tuo NFC
+Crea il tuo portachiavi
 </h1>
 
-
-
-<div class="previewBox">
 
 
 <div id="customProduct">
@@ -59,15 +60,28 @@ Personalizza il tuo NFC
 </div>
 
 
-<h2 id="previewName">
+
+
+<h2 id="previewTitle">
+
 Portachiavi Rotondo Nero
+
 </h2>
 
 
 
+<div class="livePrice">
+
+€<span id="price">
+
+19.99
+
+</span>
+
 </div>
 
 
+
 </div>
 
 
@@ -77,8 +91,9 @@ Portachiavi Rotondo Nero
 
 
 
+<div class="customPanel">
 
-<div class="custom-right">
+
 
 
 
@@ -86,43 +101,61 @@ Portachiavi Rotondo Nero
 
 
 <h2>
-Forma
+1. Scegli la forma
 </h2>
+
 
 
 <div class="options">
 
 
 <button onclick="setShape('Rotondo')">
+
 ⭕
 <br>
 Rotondo
+
 </button>
 
 
 <button onclick="setShape('Quadrato')">
+
 ⬛
 <br>
 Quadrato
+
+</button>
+
+
+<button onclick="setShape('Rettangolare')">
+
+▭
+<br>
+Rettangolare
+
 </button>
 
 
 <button onclick="setShape('Esagonale')">
+
 ⬡
 <br>
 Esagonale
+
 </button>
 
 
 <button onclick="setShape('Personalizzata')">
+
 ⭐
 <br>
-Personalizzata
+Libera
+
 </button>
 
 
-</div>
 
+</div>
 
 
 </div>
@@ -139,7 +172,7 @@ Personalizzata
 
 
 <h2>
-Colore
+2. Scegli colore
 </h2>
 
 
@@ -147,16 +180,39 @@ Colore
 <div class="colorOptions">
 
 
-<div onclick="setColor('Nero','#111')" class="circle nero"></div>
+<div 
+class="circle nero active"
+onclick="setColor('Nero','#111')">
+</div>
 
 
-<div onclick="setColor('Verde','#10b981')" class="circle verde"></div>
+
+<div 
+class="circle verde"
+onclick="setColor('Verde','#10b981')">
+</div>
 
 
-<div onclick="setColor('Bianco','#eee')" class="circle bianco"></div>
+
+<div 
+class="circle bianco"
+onclick="setColor('Bianco','#eeeeee')">
+</div>
 
 
-<div onclick="setColor('Oro','#d4af37')" class="circle oro"></div>
+
+<div 
+class="circle oro"
+onclick="setColor('Oro','#d4af37')">
+</div>
+
+
+
+<div 
+class="circle blu"
+onclick="setColor('Blu','#2563eb')">
+</div>
+
 
 
 </div>
@@ -176,8 +232,9 @@ Colore
 
 
 <h2>
-Quantità
+3. Quantità
 </h2>
+
 
 
 <div class="quantity">
@@ -188,7 +245,7 @@ Quantità
 </button>
 
 
-<span id="qty">
+<span id="quantity">
 1
 </span>
 
@@ -215,27 +272,40 @@ Quantità
 
 
 <h2>
-Personalizzazione
+4. Personalizzazione
 </h2>
 
 
-<textarea 
+
+
+<textarea
 id="description"
 placeholder="
-Scrivi come vuoi il tuo portachiavi:
-Nome, logo, frase, dettagli...
-"></textarea>
+Descrivi il tuo portachiavi:
+
+Nome
+Logo
+Frase
+Numero telefono
+Idea particolare
+">
+</textarea>
+
 
 
 
 
 <label class="upload">
 
-📷 Inserisci immagine
+
+📷 Carica immagine o logo
+
 
 <input 
 type="file"
-id="image">
+id="image"
+accept="image/*">
+
 
 </label>
 
@@ -250,7 +320,8 @@ id="image">
 
 
 
-<div class="summary">
+
+<div class="card summary">
 
 
 <h2>
@@ -258,32 +329,30 @@ Riepilogo
 </h2>
 
 
+
 <p id="summary">
 
-Rotondo - Nero
+Rotondo | Nero | Quantità 1
 
 </p>
 
 
-<h2>
-
-€<span id="total">
-19,99
-
-</span>
-
-</h2>
 
 
+<button 
+class="mainBtn"
+onclick="addCart()">
 
-<button onclick="addCart()" class="mainBtn">
-
-Aggiungi al carrello
+🛒 Aggiungi al carrello
 
 </button>
 
 
+
 </div>
+
+
+
 
 
 
@@ -292,6 +361,9 @@ Aggiungi al carrello
 
 
 </section>
+
+
+
 
 
 
