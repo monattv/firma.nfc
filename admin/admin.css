@@ -1,32 +1,30 @@
 body{
 
+margin:0;
+
 background:#111827;
 
 color:white;
 
-font-family:Arial;
-
-display:flex;
-
-justify-content:center;
-
-align-items:center;
-
-height:100vh;
+font-family:Arial,sans-serif;
 
 }
 
 
 
-.login-box{
-
-background:#1f2937;
+.dashboard{
 
 padding:40px;
 
-border-radius:20px;
+max-width:900px;
 
-width:300px;
+margin:auto;
+
+}
+
+
+
+h1{
 
 text-align:center;
 
@@ -34,17 +32,17 @@ text-align:center;
 
 
 
-input{
+.box{
 
-width:100%;
 
-padding:12px;
+background:#1f2937;
 
-margin:10px 0;
+padding:25px;
 
-border-radius:10px;
+margin:20px 0;
 
-border:none;
+border-radius:20px;
+
 
 }
 
@@ -52,18 +50,18 @@ border:none;
 
 button{
 
-width:100%;
-
-padding:14px;
 
 background:#22c55e;
 
 border:none;
 
-border-radius:10px;
+padding:15px 25px;
 
-font-size:18px;
+border-radius:12px;
 
 cursor:pointer;
+
+font-size:16px;
+
 
 }
