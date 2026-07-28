@@ -1,4 +1,4 @@
-const API_URL = "METTI QUI IL TUO LINK APPS SCRIPT";
+const API_URL = "https://script.google.com/macros/s/AKfycbyX9Kvz-Aa0PqfIoFLShhRcSuQYiffFFpZJKRncx_3S94PDN7-o83LGTHO5QrxILQ2V/exec";
 
 
 // Recupera ID prodotto dall'URL
